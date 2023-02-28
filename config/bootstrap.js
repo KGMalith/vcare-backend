@@ -10,6 +10,9 @@
  */
 
 module.exports.bootstrap = async function() {
+  process.env.TZ = 'UTC'; //run utc time in local
+  sails.moment = require('moment');
+  sails.moment_tz = require('moment-timezone');
 
   // By convention, this is a good place to set up fake data during development.
   //

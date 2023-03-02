@@ -34,6 +34,16 @@ module.exports.routes = {
   ***************************************************************************/
 
 
-  //User  Endpoints
+  //===================== User  Endpoints ====================================
 
+  //Roles
+
+  'POST /api/v1/roles/create-role': { action: 'v-1/roles/create-role' },
+  'GET /api/v1/roles/get-role': { action: 'v-1/roles/get-role-details' },
+  'DELETE /api/v1/roles/delete-role': { action: 'v-1/roles/delete-role' },
+  'POST /api/v1/roles/edit-role': { action: 'v-1/roles/edit-role' },
+  'POST /api/v1/roles/update-role-permissions': { action: 'v-1/roles/update-role-permissions' },
+
+  //User
+  'POST /api/v1/users/add-user': { action: 'v-1/users/add-user' },
 };

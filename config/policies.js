@@ -17,6 +17,6 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': ['isAuthorized'], //Everything restrict here
+  // '*': ['isAuthorized'], //Everything restrict here
 
 };

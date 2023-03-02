@@ -26,6 +26,7 @@ module.exports = {
 
     emp_code: {type:'string', unique:true, required:true},
     user_id: {model:'User'},
+    is_user_account_exists:{type:'number', defaultsTo:0},
     first_name: {type:'string', required:true},
     last_name: {type:'string', required:true},
     email: {type:'string', required:true},

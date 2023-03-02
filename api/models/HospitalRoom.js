@@ -26,9 +26,9 @@ module.exports = {
 
     room_number: {type:'number', required:true},
     room_desc: {type:'string', allowNull:true},
-    is_room_taken: {type:'number', defaultTo:0},
-    room_charge: {type:'number', defaultTo:0},
-    room_status: {type:'number', defaultTo:0},
+    is_room_taken: {type:'number', defaultsTo:0},
+    room_charge: {type:'number', defaultsTo:0},
+    room_status: {type:'number', defaultsTo:0},
   },
 
 };

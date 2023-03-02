@@ -25,7 +25,8 @@ module.exports = {
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
     role_id:{model:'Role'},
-    permission_id:{model:'Permission'}
+    permission_id:{model:'Permission'},
+    is_active:{type:'number', defaultsTo:1}
   },
 
 };

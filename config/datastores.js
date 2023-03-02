@@ -49,7 +49,7 @@ module.exports.datastores = {
     *                                                                          *
     ***************************************************************************/
     adapter: 'sails-mysql',
-    url: 'mysql://root:rootroot@localhost:port/vcare',
+    url: 'mysql://root:rootroot@localhost:3306/vcare',
     timezone: 'utc'
 
   },

@@ -14,10 +14,10 @@ module.exports = async function (req, res, next) {
       req.user = decodedToken;
       return next();
     } catch (error) {
-      return res.status(401).send({ message: 'Invalid token' });
+      return res.status(401).send({ status:false, message: 'Invalid token' });
     }
   }else{
-    return res.status(401).send({ message: 'Missing authorization header' });
+    return res.status(401).send({ status:false, message: 'Missing authorization header' });
   }
 
 };

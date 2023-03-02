@@ -25,7 +25,7 @@ module.exports = {
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
     type: {type:'string', required:true},
-    generated_id: {type:'number', defaultTo:0},
+    generated_id: {type:'number', defaultsTo:0},
   },
 
 };

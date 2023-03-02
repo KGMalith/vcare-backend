@@ -25,10 +25,10 @@ module.exports = {
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
     bill_code: {type:'string', unique:true, required:true},
-    gross_total: {type:'number', defaultTo:0},
-    discount: {type:'number', defaultTo:0},
-    received_amount: {type:'number', defaultTo:0},
-    grand_total: {type:'number', defaultTo:0},
+    gross_total: {type:'number', defaultsTo:0},
+    discount: {type:'number', defaultsTo:0},
+    received_amount: {type:'number', defaultsTo:0},
+    grand_total: {type:'number', defaultsTo:0},
     patient_admission:{model:'PatientAdmission'},
     patient_appointment:{model:'PatientAppointment'}
   },

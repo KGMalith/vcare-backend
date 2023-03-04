@@ -28,6 +28,7 @@ module.exports = {
     admit_date: {type:'ref',columnType:'datetime', required:true},
     discharge_date: {type:'ref',columnType:'datetime', required:true},
     hospital_room: {model:'HospitalRoom'},
+    patient_id: {model:'Patient'},
   },
 
 };

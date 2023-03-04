@@ -26,7 +26,8 @@ module.exports = {
 
     emp_id: {model:'Employee'},
     document_code: {type:'string', unique:true, required:true},
-    document_type: {type:'string', required:true},
+    document_name: {type:'string', required:true},
+    document_desc: {type:'string', allowNull:true},
     document_URL: {type:'string', required:true},
   },
 

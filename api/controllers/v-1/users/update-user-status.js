@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 module.exports = {
 
 
@@ -40,17 +41,27 @@ module.exports = {
       });
     }
 
-    if(inputs.status !== 1 && inputs.status !== -10){
+    //check input status valid
+    if(inputs.status !== sails.config.custom.user_active && inputs.status !== sails.config.custom.user_deactivated){
       exits.otherError({
         status:false,
         message:'Invalid status code!'
       });
     }
 
+    //check user account not acivated
     if(user.status === 0){
       exits.otherError({
         status:false,
         message:'User account not activated!'
+      });
+    }
+
+    //check status already updated
+    if(user.status == inputs.status){
+      exits.otherError({
+        status:false,
+        message:'User status already updated!'
       });
     }
 

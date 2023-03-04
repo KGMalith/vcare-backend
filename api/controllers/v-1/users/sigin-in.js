@@ -74,7 +74,7 @@ module.exports = {
     }
 
     //get all permissions related to role
-    let permissions = await RolePermission.find({select:['permission_id'],where:{role_id:user_obj.role_id,is_active:1}});
+    let permissions = await RolePermission.find({select:['permission_id'],where:{role_id:user_obj.role_id,is_active:sails.config.custom.role_permission_active}});
 
     const token_body = {
       user_email:user_obj.email,

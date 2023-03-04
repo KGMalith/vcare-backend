@@ -37,13 +37,52 @@ module.exports.routes = {
   //===================== User  Endpoints ====================================
 
   //Roles
-
   'POST /api/v1/roles/create-role': { action: 'v-1/roles/create-role' },
-  'GET /api/v1/roles/get-role': { action: 'v-1/roles/get-role-details' },
   'DELETE /api/v1/roles/delete-role': { action: 'v-1/roles/delete-role' },
   'POST /api/v1/roles/edit-role': { action: 'v-1/roles/edit-role' },
+  'GET /api/v1/roles/get-roles': { action: 'v-1/roles/get-all-roles' },
+  'GET /api/v1/roles/get-role': { action: 'v-1/roles/get-role-details' },
   'POST /api/v1/roles/update-role-permissions': { action: 'v-1/roles/update-role-permissions' },
 
   //User
   'POST /api/v1/users/add-user': { action: 'v-1/users/add-user' },
+  'GET /api/v1/users/get-users': { action: 'v-1/users/get-all-users' },
+  'POST /api/v1/users/setup-password': { action: 'v-1/users/setup-password' },
+  'POST /api/v1/users/sigin-in': { action: 'v-1/users/sigin-in' },
+  'POST /api/v1/users/update-profile': { action: 'v-1/users/update-profile' },
+  'POST /api/v1/users/update-user-status': { action: 'v-1/users/update-user-status' },
+  'POST /api/v1/users/update-user': { action: 'v-1/users/update-user' },
+  'POST /api/v1/users/upload-profile-image': { action: 'v-1/users/upload-profile-image' },
+  'POST /api/v1/users/validate-token': { action: 'v-1/users/validate-token' },
+
+  //Rooms
+  'POST /api/v1/rooms/create-room': { action: 'v-1/rooms/create-room' },
+  'DELETE /api/v1/rooms/delete-room': { action: 'v-1/rooms/delete-room' },
+  'POST /api/v1/rooms/edit-room': { action: 'v-1/rooms/edit-room' },
+  'GET /api/v1/rooms/get-all-rooms': { action: 'v-1/rooms/get-all-rooms' },
+  'GET /api/v1/rooms/get-room-details': { action: 'v-1/rooms/get-room-details' },
+  'POST /api/v1/rooms/update-room-status': { action: 'v-1/rooms/update-room-status' },
+
+  //Services
+  'POST /api/v1/services/create-service': { action: 'v-1/services/create-service' },
+  'DELETE /api/v1/services/delete-room': { action: 'v-1/services/delete-room' },
+  'POST /api/v1/services/edit-service': { action: 'v-1/services/edit-service' },
+  'GET /api/v1/services/get-all-services': { action: 'v-1/services/get-all-services' },
+  'GET /api/v1/services/get-service-details': { action: 'v-1/services/get-service-details' },
+  'POST /api/v1/services/update-service-status': { action: 'v-1/services/update-service-status' },
+
+  //Employee
+  'POST /api/v1/employee/create-employee': { action: 'v-1/employee/create-employee' },
+  'POST /api/v1/employee/edit-employee': { action: 'v-1/employee/edit-employee' },
+  'DELETE /api/v1/employee/delete-employee': { action: 'v-1/employee/delete-employee' },
+  'GET /api/v1/employee/get-all-employees': { action: 'v-1/employee/get-all-employees' },
+  'GET /api/v1/employee/get-employee': { action: 'v-1/employee/get-employee' },
+  'GET /api/v1/employee/upload-employee-image': { action: 'v-1/employee/upload-employee-image' },
+
+  'POST /api/v1/employee/contact/add-contact': { action: 'v-1/employee/contact/add-contact' },
+  'DELETE /api/v1/employee/contact/delete-contact': { action: 'v-1/employee/contact/delete-contact' },
+
+  'POST /api/v1/employee/documents/create-document': { action: 'v-1/employee/documents/create-document' },
+  'DELETE /api/v1/employee/documents/delete-document': { action: 'v-1/employee/documents/delete-document' },
+  'POST /api/v1/employee/documents/upload-document': { action: 'v-1/employee/documents/upload-document' },
 };

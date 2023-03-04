@@ -71,10 +71,18 @@ module.exports = {
     }
 
     //check requested status valid
-    if(inputs.status != 0 && inputs.status != 1){
+    if(inputs.status != sails.config.custom.role_permission_active && inputs.status != sails.config.custom.role_permission_deactive){
       return exits.otherError({
         status:false,
         message:'Invalid request status'
+      });
+    }
+
+    //check permission status already updated
+    if(role_permission.is_active == inputs.status){
+      return exits.otherError({
+        status:false,
+        message:'Role permission already updated'
       });
     }
 

@@ -43,7 +43,7 @@ module.exports = {
 
   fn: async function (inputs,exits) {
 
-    //check email already exists
+    //check user already exists
     var user = await User.findOne({
       id:inputs.id
     });
@@ -66,7 +66,7 @@ module.exports = {
     }
 
     //check new email already taken
-    let user_obj = await User.findOne({email:inputs.email});
+    let user_obj = await User.findOne({email:inputs.email, id: { '!=': inputs.id }});
 
     var doctor_obj = await Doctor.findOne({ email:inputs.email});
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 module.exports = {
 
 
@@ -68,8 +69,12 @@ module.exports = {
     //get encrypted default password
     let encrypted_password = await sails.helpers.auth.encryptPassword(sails.config.custom.default_password);
 
+    //generate user code
+    let user_code = await sails.helpers.other.generateId('USR');
+
     //create user
     var user_obj = await User.create({
+      user_code:user_code,
       first_name:inputs.first_name,
       last_name:inputs.last_name,
       email:inputs.email,

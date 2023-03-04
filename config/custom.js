@@ -26,7 +26,7 @@ module.exports.custom = {
   aws_employee_image_bucket:'',
   aws_employee_document_bucket:'',
   encryption_key:'d6nKFeuhB5puzMaV',
-  sendinblueSecret: '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',
+  sendinblueSecret: '',
   frontend_base_url:'http://localhost:3000/',
 
 
@@ -39,5 +39,24 @@ module.exports.custom = {
 
   //constants
   user_active:1,
-  user_deactivated:-10
+  user_deactivated:-10,
+
+  role_permission_active:1,
+  role_permission_deactive:0,
+
+  hospital_room_available:1,
+  hospital_room_taken:10,
+  hospital_room_cleaning:0,
+  hospital_room_closed_for_maintenance:-10,
+
+  hospital_service_active:1,
+  hospital_service_inactive:0,
+
+  //s3
+  s3_key:'',
+  s3_secret:'',
+  s3_bucket:'',
+  user_images_dir:'',
+  employee_images_dir:'',
+  employee_document_dir:'',
 };

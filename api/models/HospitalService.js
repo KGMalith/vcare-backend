@@ -27,7 +27,8 @@ module.exports = {
     service_code: {type:'string', required:true},
     service_name: {type:'string', required:true},
     service_desc: {type:'string', allowNull:true},
-    service_charge: {type:'number', defaultTo:0},
+    service_charge: {type:'number', defaultsTo:0},
+    status:{type:'number', defaultsTo:1}, //1->active, 0->not active
   },
 
 };

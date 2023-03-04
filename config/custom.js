@@ -18,7 +18,45 @@ module.exports.custom = {
   // sendgridSecret: 'SG.fake.3e0Bn0qSQVnwb1E4qNPz9JZP5vLZYqjh7sn8S93oSHU',
   // stripeSecret: 'sk_test_Zzd814nldl91104qor5911gjald',
   // …
-  //JWT SECRET
-  jwt_secret:'a7pn8JRawzweVdWZ'
+  jwt_secret:'a7pn8JRawzweVdWZ',
+  default_password:'Test123',
+  aws_key:'',
+  aws_secret_key:'',
+  aws_user_image_bucket:'',
+  aws_employee_image_bucket:'',
+  aws_employee_document_bucket:'',
+  encryption_key:'d6nKFeuhB5puzMaV',
+  sendinblueSecret: '',
+  frontend_base_url:'http://localhost:3000/',
 
+
+  //sendinblue email templates ids
+  user_signup_invitation:9,
+  user_password_reset:10,
+  user_account_deactivated:11,
+  user_account_reactivated:12,
+
+
+  //constants
+  user_active:1,
+  user_deactivated:-10,
+
+  role_permission_active:1,
+  role_permission_deactive:0,
+
+  hospital_room_available:1,
+  hospital_room_taken:10,
+  hospital_room_cleaning:0,
+  hospital_room_closed_for_maintenance:-10,
+
+  hospital_service_active:1,
+  hospital_service_inactive:0,
+
+  //s3
+  s3_key:'',
+  s3_secret:'',
+  s3_bucket:'',
+  user_images_dir:'',
+  employee_images_dir:'',
+  employee_document_dir:'',
 };

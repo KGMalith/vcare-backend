@@ -26,9 +26,8 @@ module.exports = {
 
     room_number: {type:'number', required:true},
     room_desc: {type:'string', allowNull:true},
-    is_room_taken: {type:'number', defaultTo:0},
-    room_charge: {type:'number', defaultTo:0},
-    room_status: {type:'number', defaultTo:0},
+    room_charge: {type:'number', defaultsTo:0},
+    room_status: {type:'number', defaultsTo:1}, //1-> Available, 10-> taken, 0-> cleaning, -10-> closed for maintenance 
   },
 
 };

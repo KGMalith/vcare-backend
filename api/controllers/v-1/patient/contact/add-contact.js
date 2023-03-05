@@ -8,7 +8,7 @@ module.exports = {
 
 
   inputs: {
-    emp_id:{
+    patient_id:{
       type:'number',
       required:true
     },
@@ -38,29 +38,30 @@ module.exports = {
 
 
   fn: async function (inputs,exits) {
-    //check employee exists for user
-    let is_exists = await Employee.findOne({id:inputs.emp_id});
+
+    //check patient exists for user
+    let is_exists = await Patient.findOne({id:inputs.patient_id});
 
     if(!is_exists){
       return exits.notFound({
         status:false,
-        message:'Employee profile not found!'
+        message:'Patient profile not found!'
       });
     }
 
     //check input data already exists
-    let contact = await EmployeeEmergencyContact.find({name:inputs.name.toLowerCase(),emp_id:inputs.emp_id});
+    let contact = await PatientEmergencyContact.find({name:inputs.name.toLowerCase(),patient_id:inputs.patient_id});
 
     if(contact){
       return exits.otherError({
         status:false,
-        message:'Employee enegency contact detail already exists!'
+        message:'Patient enegency contact detail already exists!'
       });
     }
 
     //create contact
-    await EmployeeEmergencyContact.create({
-      emp_id:inputs.emp_id,
+    await PatientEmergencyContact.create({
+      patient_id:inputs.patient_id,
       name:inputs.name,
       mobile:inputs.mobile,
       relationship:inputs.relationship
@@ -69,8 +70,10 @@ module.exports = {
     // All done.
     return exits.success({
       status:true,
-      message:'Employee emergency contact created successfully!'
+      message:'Patient emergency contact created successfully!'
     });
 
   }
+
+
 };

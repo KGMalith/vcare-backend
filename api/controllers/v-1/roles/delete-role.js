@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 module.exports = {
 
 
@@ -33,6 +34,13 @@ module.exports = {
       return exits.notFound({
         status:false,
         message:'Invalid role id!'
+      });
+    }
+
+    if(inputs.id == 1 || inputs.id == 2 || inputs.id == 3){
+      return exits.otherError({
+        status:false,
+        message:'You have no permission to delete Admin, Patient, Doctor Roles!'
       });
     }
 

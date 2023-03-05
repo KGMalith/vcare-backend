@@ -35,6 +35,9 @@ module.exports.custom = {
   user_password_reset:10,
   user_account_deactivated:11,
   user_account_reactivated:12,
+  welcome:14,
+  email_verify:15,
+  forgot_password:16,
 
 
   //constants
@@ -59,4 +62,6 @@ module.exports.custom = {
   user_images_dir:'',
   employee_images_dir:'',
   employee_document_dir:'',
+  patient_images_dir:'',
+  patient_document_dir:'',
 };

@@ -8,10 +8,6 @@ module.exports = {
 
 
   inputs: {
-    id:{
-      type:'number',
-      required:true
-    },
     first_name:{
       type:'string',
       required:true
@@ -37,7 +33,7 @@ module.exports = {
 
     //check email already exists
     var user = await User.findOne({
-      id:inputs.id
+      id:this.req.user.user_id
     });
 
     if(!user){
@@ -48,7 +44,7 @@ module.exports = {
     }
 
     //update user
-    await User.updateOne({id:inputs.id}).set({
+    await User.updateOne({id:this.req.user.user_id}).set({
       first_name:inputs.first_name,
       last_name:inputs.last_name
     });

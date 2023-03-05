@@ -26,7 +26,8 @@ module.exports = {
 
     patient_id: {model:'Patient'},
     document_code: {type:'string', required:true},
-    document_type: {type:'string', required:true},
+    document_name: {type:'string', required:true},
+    document_desc: {type:'string', allowNull:true},
     document_URL: {type:'string', required:true},
   },
 

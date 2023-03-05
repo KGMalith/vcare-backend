@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 module.exports = {
 
 
@@ -45,6 +46,13 @@ module.exports = {
       return exits.notFound({
         status:false,
         message:'Invalid role id!'
+      });
+    }
+
+    if(inputs.id == 1){
+      return exits.otherError({
+        status:false,
+        message:'You have no permission to update Admin Role!'
       });
     }
 

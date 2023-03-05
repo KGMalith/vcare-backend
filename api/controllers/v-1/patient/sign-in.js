@@ -2,7 +2,7 @@
 module.exports = {
 
 
-  friendlyName: 'Sigin in',
+  friendlyName: 'Sign in',
 
 
   description: '',
@@ -34,7 +34,7 @@ module.exports = {
     const jwt = require('jsonwebtoken');
 
     //check email is valid
-    let user_obj = await User.findOne({email:inputs.email});
+    let user_obj = await Patient.findOne({email:inputs.email});
 
     if(!user_obj){
       return exits.notFound({
@@ -43,24 +43,10 @@ module.exports = {
       });
     }
 
-    if(user_obj.is_signup_completed == 0){
+    if(user_obj.is_signup_completed == 0 && user_obj.is_email_confirmation_sent == 1){
       return exits.otherError({
         status:false,
         message:'Signup not completed! Please find email in your inbox to continue signup'
-      });
-    }
-
-    if(user_obj.status == sails.config.custom.user_deactivated){
-      return exits.otherError({
-        status:false,
-        message:'Admin deactivated your account!'
-      });
-    }
-
-    if(user_obj.is_password_reset_requested == 1 && user_obj.hash_code){
-      return exits.otherError({
-        status:false,
-        message:'Admin reset your password! Please check inbox to proceed'
       });
     }
 
@@ -101,4 +87,5 @@ module.exports = {
     });
 
   }
+
 };

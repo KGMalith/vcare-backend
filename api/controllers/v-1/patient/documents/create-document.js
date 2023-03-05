@@ -8,7 +8,7 @@ module.exports = {
 
 
   inputs: {
-    emp_id:{
+    patient_id:{
       type:'number',
       required:true
     },
@@ -39,22 +39,22 @@ module.exports = {
 
   fn: async function (inputs,exits) {
 
-    //check employee exists for user
-    let is_exists = await Employee.findOne({id:inputs.emp_id});
+    //check patient exists for user
+    let is_exists = await Patient.findOne({id:inputs.patient_id});
 
     if(!is_exists){
       return exits.notFound({
         status:false,
-        message:'Employee profile not found!'
+        message:'Patient profile not found!'
       });
     }
 
     //generate document code
-    let doc_code = await sails.helpers.other.generateId('EMP_DOC');
+    let doc_code = await sails.helpers.other.generateId('PAT_DOC');
 
     //create document
-    await EmployeeDocument.create({
-      emp_id:inputs.emp_id,
+    await PatientDocument.create({
+      patient_id:inputs.patient_id,
       document_code:doc_code,
       document_name:inputs.document_name,
       document_desc:inputs.document_desc,
@@ -64,7 +64,7 @@ module.exports = {
     // All done.
     return exits.success({
       status:true,
-      message:'Employee document created successfully!'
+      message:'Patient document created successfully!'
     });
 
   }

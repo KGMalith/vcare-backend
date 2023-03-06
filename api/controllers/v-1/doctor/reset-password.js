@@ -32,51 +32,50 @@ module.exports = {
 
   fn: async function (inputs,exits) {
     //decrypt token
-    let patient_id = await sails.helpers.other.decrypt(inputs.token);
+    let doctor_id = await sails.helpers.other.decrypt(inputs.token);
 
     //expire all tokens which are less than current time
     let current_timestamp = sails.moment().utc().format('YYYY-MM-DD HH:mm:ss');
 
-    const patients_sql = `SELECT t1.id FROM patients t1 WHERE t1.hash_code_expire < ${current_timestamp}`;
-    var patient_id_list = await sails.sendNativeQuery(patients_sql);
-    patient_id_list = patient_id_list.rows;
+    const doctors_sql = `SELECT t1.id FROM doctors t1 WHERE t1.hash_code_expire < ${current_timestamp}`;
+    var doctor_id_list = await sails.sendNativeQuery(doctors_sql);
+    doctor_id_list = doctor_id_list.rows;
 
-    if(patient_id_list.length > 0){
-      for(let patient_id of patient_id_list){
-        const patient_update_sql = `UPDATE TABLE patients t1 SET t1.hash_code = NULL,hash_code_expire = NULL WHERE t1.id = ${patient_id}`;
-        await sails.sendNativeQuery(patient_update_sql);
+    if(doctor_id_list.length > 0){
+      for(let doctor_id of doctor_id_list){
+        const doctor_update_sql = `UPDATE TABLE doctors t1 SET t1.hash_code = NULL,hash_code_expire = NULL WHERE t1.id = ${doctor_id}`;
+        await sails.sendNativeQuery(doctor_update_sql);
       }
     }
 
-    //get patient object
-    let patient = await Patient.findOne({id:patient_id,forgot_password_requested:1});
-    if(!patient){
+    //get doctor object
+    let doctor = await Doctor.findOne({id:doctor_id,forgot_password_requested:1});
+    if(!doctor){
       exits.notFound({
         status:false,
         message:'Invalid token!'
       });
     }
 
-    if(patient.hash_code && patient.hash_code_expire  < current_timestamp){
+    if(doctor.hash_code && doctor.hash_code_expire  < current_timestamp){
       exits.otherError({
         status:false,
         message:'Token expired!'
       });
     }
 
-    if(patient.forgot_password_requested == 1 && !patient.hash_code){
+    if(doctor.forgot_password_requested == 1 && !doctor.hash_code){
       exits.otherError({
         status:false,
         message:'Token expired!'
       });
     }
-
 
     //get encrypted password
     let encrypted_password = await sails.helpers.auth.encryptPassword(inputs.password);
 
-    //update patient
-    await Patient.updateOne({id:patient_id}).set({
+    //update doctor
+    await Doctor.updateOne({id:doctor_id}).set({
       hash_code:null,
       hash_code_expire:null,
       forgot_password_requested:0,

@@ -60,23 +60,23 @@ module.exports = {
     let encrypted_password = await sails.helpers.auth.encryptPassword(inputs.password);
 
     //generate patient code
-    let patient_code = await sails.helpers.other.generateId('PAT');
+    let doctor_code = await sails.helpers.other.generateId('DOC');
 
     //create patient
-    var patient_obj = await Patient.create({
-      patient_code:patient_code,
+    var doctor_obj = await Doctor.create({
+      doctor_code:doctor_code,
       first_name:inputs.first_name,
       last_name:inputs.last_name,
       email:inputs.email,
       password:encrypted_password,
-      role_id:2,
+      role_id:3,
     }).fetch();
 
-    let hash_code = await sails.helpers.other.encrypt(patient_obj.id);
+    let hash_code = await sails.helpers.other.encrypt(doctor_obj.id);
     let hash_code_expire = sails.moment().utc().add(24,'h').format('YYYY-MM-DD HH:mm:ss');
 
     //update patient
-    await Patient.updateOne({id:patient_obj.id}).set({
+    await Doctor.updateOne({id:doctor_obj.id}).set({
       hash_code:hash_code,
       hash_code_expire:hash_code_expire
     });
@@ -84,7 +84,7 @@ module.exports = {
     //send email
     let params = {
       USER_NAME:inputs.first_name+' '+inputs.last_name,
-      LINK:`${sails.config.custom.frontend_base_url}patient/email-verification/${hash_code}`
+      LINK:`${sails.config.custom.frontend_base_url}doctor/email-verification/${hash_code}`
     };
 
     let respond = await sails.helpers.email.sendEmail.with({
@@ -96,7 +96,7 @@ module.exports = {
 
     if(respond.status){
       //update patient as email sent
-      await Patient.updateOne({id:patient_obj.id}).set({
+      await Doctor.updateOne({id:doctor_obj.id}).set({
         is_email_confirmation_sent:1,
       });
     }
@@ -108,6 +108,4 @@ module.exports = {
     });
 
   }
-
-
 };

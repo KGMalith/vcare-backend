@@ -43,8 +43,9 @@ module.exports = {
 
 
   fn: async function (inputs,exits) {
+
     //check user id valid
-    let user = await Patient.findOne({id:this.req.user.user_id});
+    let user = await Doctor.findOne({id:this.req.user.user_id});
 
     if(!user){
       return exits.notFound({
@@ -59,8 +60,8 @@ module.exports = {
       let hash_code = await sails.helpers.other.encrypt(user.id);
       let hash_code_expire = sails.moment().utc().add(24,'h').format('YYYY-MM-DD HH:mm:ss');
 
-      //update patient
-      await Patient.updateOne({id:user.id}).set({
+      //update doctor
+      await Doctor.updateOne({id:user.id}).set({
         hash_code:hash_code,
         hash_code_expire:hash_code_expire,
         is_signup_completed:0,
@@ -70,7 +71,7 @@ module.exports = {
       //send email
       let params = {
         USER_NAME:inputs.first_name+' '+inputs.last_name,
-        LINK:`${sails.config.custom.frontend_base_url}patient/email-verification/${hash_code}`
+        LINK:`${sails.config.custom.frontend_base_url}doctor/email-verification/${hash_code}`
       };
 
       let respond = await sails.helpers.email.sendEmail.with({
@@ -81,15 +82,15 @@ module.exports = {
       });
 
       if(respond.status){
-        //update patient as email sent
-        await Patient.updateOne({id:user.id}).set({
+        //update doctor as email sent
+        await Doctor.updateOne({id:user.id}).set({
           is_email_confirmation_sent:1,
         });
       }
     }
 
     //update user
-    await Patient.updateOne({id:user.id}).set({
+    await Doctor.updateOne({id:user.id}).set({
       first_name:inputs.first_name,
       last_name:inputs.last_name,
       email:inputs.email,

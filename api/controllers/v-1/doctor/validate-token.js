@@ -1,5 +1,4 @@
 /* eslint-disable eqeqeq */
-/* eslint-disable no-unused-vars */
 module.exports = {
 
 
@@ -28,49 +27,48 @@ module.exports = {
 
 
   fn: async function (inputs,exits) {
-
     //decrypt token
-    let patient_id = await sails.helpers.other.decrypt(inputs.token);
+    let doctor_id = await sails.helpers.other.decrypt(inputs.token);
 
     //expire all tokens which are less than current time
     let current_timestamp = sails.moment().utc().format('YYYY-MM-DD HH:mm:ss');
 
-    const patients_sql = `SELECT t1.id FROM patients t1 WHERE t1.hash_code_expire < ${current_timestamp}`;
-    var patient_id_list = await sails.sendNativeQuery(patients_sql);
-    patient_id_list = patient_id_list.rows;
+    const doctors_sql = `SELECT t1.id FROM doctors t1 WHERE t1.hash_code_expire < ${current_timestamp}`;
+    var doctors_id_list = await sails.sendNativeQuery(doctors_sql);
+    doctors_id_list = doctors_id_list.rows;
 
-    if(patient_id_list.length > 0){
-      for(let patient_id of patient_id_list){
-        const patient_update_sql = `UPDATE TABLE patients t1 SET t1.hash_code = NULL,hash_code_expire = NULL WHERE t1.id = ${patient_id}`;
-        await sails.sendNativeQuery(patient_update_sql);
+    if(doctors_id_list.length > 0){
+      for(let doctor_id of doctors_id_list){
+        const doctor_update_sql = `UPDATE TABLE doctors t1 SET t1.hash_code = NULL,hash_code_expire = NULL WHERE t1.id = ${doctor_id}`;
+        await sails.sendNativeQuery(doctor_update_sql);
       }
     }
 
-    //get patient object
-    let patient = await Patient.findOne({id:patient_id,is_signup_completed:0});
-    if(!patient){
+    //get doctor object
+    let doctor = await Doctor.findOne({id:doctor_id,is_signup_completed:0});
+    if(!doctor){
       exits.notFound({
         status:false,
         message:'Invalid token!'
       });
     }
 
-    if(patient.hash_code && patient.hash_code_expire  < current_timestamp){
+    if(doctor.hash_code && doctor.hash_code_expire  < current_timestamp){
       exits.otherError({
         status:false,
         message:'Token expired!'
       });
     }
 
-    if(patient.is_email_confirmation_sent == 1 && !patient.hash_code){
+    if(doctor.is_email_confirmation_sent == 1 && !doctor.hash_code){
       exits.otherError({
         status:false,
         message:'Token expired!'
       });
     }
 
-    //update patient
-    await Patient.updateOne({id:patient_id}).set({
+    //update doctor
+    await Doctor.updateOne({id:doctor_id}).set({
       hash_code:null,
       hash_code_expire:null,
       is_signup_completed:1,
@@ -79,7 +77,7 @@ module.exports = {
     //send email
     let params = {
       USER_NAME:inputs.first_name+' '+inputs.last_name,
-      ROLE_FUNCTIONS:'appointments, Bill payments easily.',
+      ROLE_FUNCTIONS:'appointments arrangements, check assigned patients admissions & appointments etc.',
       LINK:`${sails.config.custom.frontend_base_url}patient/email-verification/${hash_code}`
     };
 

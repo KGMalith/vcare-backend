@@ -64,4 +64,5 @@ module.exports.custom = {
   employee_document_dir:'',
   patient_images_dir:'',
   patient_document_dir:'',
+  doctor_images_dir:'',
 };

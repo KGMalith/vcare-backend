@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 module.exports = {
 
 
@@ -53,6 +54,13 @@ module.exports = {
     }
 
     if(user.hash_code && user.hash_code_expire  < current_timestamp){
+      exits.otherError({
+        status:false,
+        message:'Token expired!'
+      });
+    }
+
+    if(user.is_invitation_sent == 1 && !user.hash_code){
       exits.otherError({
         status:false,
         message:'Token expired!'

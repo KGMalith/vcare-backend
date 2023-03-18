@@ -22,10 +22,21 @@ module.exports = {
 
   fn: async function (inputs,exits) {
 
-    //update timezone
-    await Settings.updateOne({type:'TimeZone'}).set({
-      value:inputs.timeZone
-    });
+    //find timezone
+    let timezone = await Settings.findOne({type:'TimeZone'});
+
+    if(timezone){
+      //update timezone
+      await Settings.updateOne({type:'TimeZone'}).set({
+        value:inputs.timeZone
+      });
+    }else{
+      //create timezone
+      await Settings.create({
+        type:'TimeZone',
+        value:inputs.timeZone
+      });
+    }
 
     // All done.
     return exits.success({

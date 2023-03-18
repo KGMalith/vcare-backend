@@ -25,7 +25,7 @@ module.exports = {
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
     type: {type:'string', required:true},
-    value: {type:'string', required:true},
+    value: {type:'string', allowNull:true},
   },
 
 };

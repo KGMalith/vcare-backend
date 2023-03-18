@@ -29,6 +29,7 @@ module.exports = {
     discount: {type:'number', defaultsTo:0},
     received_amount: {type:'number', defaultsTo:0},
     grand_total: {type:'number', defaultsTo:0},
+    status: {type:'number', defaultsTo:0}, //0-> pending, 10->paid, -10 -> cancelled
     patient_admission:{model:'PatientAdmission'},
     patient_appointment:{model:'PatientAppointment'}
   },

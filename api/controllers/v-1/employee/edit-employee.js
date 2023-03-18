@@ -134,12 +134,12 @@ module.exports = {
       });
     }
 
-    let hired_d = sails.moment(inputs.hired_date).utc().format('YYYY-MM-DD HH:mm:ss');
+    let hired_d = sails.moment.utc(inputs.hired_date).format('YYYY-MM-DD HH:mm:ss');
     let end_d = null;
     if(inputs.end_date){
-      end_d = sails.moment(inputs.end_date).utc().format('YYYY-MM-DD HH:mm:ss');
+      end_d = sails.moment.utc(inputs.end_date).format('YYYY-MM-DD HH:mm:ss');
     }
-    let birth_d = sails.moment(inputs.birthday).utc().format('YYYY-MM-DD HH:mm:ss');
+    let birth_d = sails.moment.utc(inputs.birthday).format('YYYY-MM-DD HH:mm:ss');
 
     //update user
     await Employee.updateOne({id:inputs.id}).set({

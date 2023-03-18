@@ -122,12 +122,12 @@ module.exports = {
     //generate employee code
     let employee_code = await sails.helpers.other.generateId('EMP');
 
-    let hired_d = sails.moment(inputs.hired_date).utc().format('YYYY-MM-DD HH:mm:ss');
+    let hired_d = sails.moment.utc(inputs.hired_date).format('YYYY-MM-DD HH:mm:ss');
     let end_d = null;
     if(inputs.end_date){
-      end_d = sails.moment(inputs.end_date).utc().format('YYYY-MM-DD HH:mm:ss');
+      end_d = sails.moment.utc(inputs.end_date).format('YYYY-MM-DD HH:mm:ss');
     }
-    let birth_d = sails.moment(inputs.birthday).utc().format('YYYY-MM-DD HH:mm:ss');
+    let birth_d = sails.moment.utc(inputs.birthday).format('YYYY-MM-DD HH:mm:ss');
 
     //create employee
     await Employee.create({

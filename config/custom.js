@@ -38,6 +38,9 @@ module.exports.custom = {
   welcome:14,
   email_verify:15,
   forgot_password:16,
+  patient_appointment_confirmed:17,
+  doctor_new_appointment:18,
+  appointment_cancelled:19,
 
 
   //constants
@@ -54,6 +57,9 @@ module.exports.custom = {
 
   hospital_service_active:1,
   hospital_service_inactive:0,
+
+  appointment_active:1,
+  appointment_cancel:0,
 
   //s3
   s3_key:'',

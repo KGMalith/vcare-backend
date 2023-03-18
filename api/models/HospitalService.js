@@ -29,6 +29,8 @@ module.exports = {
     service_desc: {type:'string', allowNull:true},
     service_charge: {type:'number', defaultsTo:0},
     status:{type:'number', defaultsTo:1}, //1->active, 0->not active
+    is_apply_to_every_appointment:{type:'number', defaultsTo:0},
+    is_apply_to_every_admission:{type:'number', defaultsTo:0},
   },
 
 };

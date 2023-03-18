@@ -35,7 +35,7 @@ module.exports = {
     hash_code_expire:{type:'ref',columnType: 'datetime'},
     is_password_reset_requested:{type:'number', defaultsTo:0},
     is_invitation_sent:{type:'number', defaultsTo:0},
-    role_id:{model:'Role'},
+    role_id:{model:'Role'}, //Admin ->1 Patient->2 Doctor->3
     status:{type:'number', defaultsTo:0},
   },
 

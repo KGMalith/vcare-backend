@@ -19,6 +19,14 @@ module.exports = {
     service_charge:{
       type:'number',
       required:true
+    },
+    is_apply_to_every_appointment:{
+      type:'number',
+      required:true
+    },
+    is_apply_to_every_admission:{
+      type:'number',
+      required:true
     }
   },
 
@@ -53,7 +61,9 @@ module.exports = {
       service_code:service_code,
       service_name:inputs.service_name.toLowerCase(),
       service_desc:inputs.service_desc,
-      service_charge:inputs.service_charge
+      service_charge:inputs.service_charge,
+      is_apply_to_every_appointment:inputs.is_apply_to_every_appointment,
+      is_apply_to_every_admission:inputs.is_apply_to_every_admission
     });
 
     // All done.

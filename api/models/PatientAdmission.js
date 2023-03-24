@@ -29,6 +29,7 @@ module.exports = {
     discharge_date: {type:'ref',columnType:'datetime', required:true},
     hospital_room: {model:'HospitalRoom'},
     patient_id: {model:'Patient'},
+    status:{type:'number', defaultsTo:1} //1->active, 0 -> discharged
   },
 
 };

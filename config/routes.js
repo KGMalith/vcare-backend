@@ -114,4 +114,23 @@ module.exports.routes = {
   'POST /api/v1/doctor/update-profile': { action: 'v-1/doctor/update-profile' },
   'POST /api/v1/doctor/upload-profile-image': { action: 'v-1/doctor/upload-profile-image' },
   'POST /api/v1/doctor/validate-token': { action: 'v-1/doctor/validate-token' },
+
+  //===================== Appointments  Endpoints ====================================
+
+  'POST /api/v1/appointments/add-appointment': { action: 'v-1/appointments/add-appointment' },
+  'POST /api/v1/appointments/cancel-appointment-patient': { action: 'v-1/appointments/cancel-appointment-patient' },
+  'POST /api/v1/appointments/cancel-appointment': { action: 'v-1/appointments/cancel-appointment' },
+  'POST /api/v1/appointments/create-appointment': { action: 'v-1/appointments/create-appointment' },
+  'GET /api/v1/appointments/get-all-appointments-patient': { action: 'v-1/appointments/get-all-appointments-patient' },
+  'GET /api/v1/appointments/get-all-appointments': { action: 'v-1/appointments/get-all-appointments' },
+  'GET /api/v1/appointments/get-appointment-details': { action: 'v-1/appointments/get-appointment-details' },
+
+  //===================== Admission  Endpoints ====================================
+
+  'POST /api/v1/admissions/add-admission': { action: 'v-1/admissions/add-admission' },
+  'POST /api/v1/admissions/discharge-patient': { action: 'v-1/admissions/discharge-patient' },
+  'GET /api/v1/admissions/get-admission-details': { action: 'v-1/admissions/get-admission-details' },
+  'GET /api/v1/admissions/get-all-admissions-patient': { action: 'v-1/admissions/get-all-admissions-patient' },
+  'GET /api/v1/admissions/get-all-admissions': { action: 'v-1/admissions/get-all-admissions' },
+  'POST /api/v1/admissions/update-admission': { action: 'v-1/admissions/update-admission' },
 };

@@ -47,6 +47,16 @@ module.exports = {
       });
     }
 
+    //current day utc
+    let current_day = sails.moment.utc().format('YYYY-MM-DD HH:mm:ss');
+
+    if(appointment.appointment_start_date < current_day){
+      return exits.otherError({
+        status:false,
+        message:'Past appointments cannot cancelled!'
+      });
+    }
+
     //cancel appointment
     await PatientAppointment.updateOne({id:inputs.id,patient_id:this.req.user.user_id}).set({
       status:sails.config.custom.appointment_cancel

@@ -95,7 +95,7 @@ module.exports = {
     }
 
     //create appointment
-    let admission = await PatientAppointment.create({
+    let appointment = await PatientAppointment.create({
       appointment_code:appointment_code,
       appointment_start_date:start_time,
       appointment_end_date:end_time,
@@ -108,7 +108,7 @@ module.exports = {
 
     let bill  = await HospitalBill.create({
       bill_code:bill_code,
-      patient_admission:admission.id
+      patient_appointment:appointment.id
     }).fetch();
 
     //check hospital services apply to every bill

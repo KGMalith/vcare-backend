@@ -29,9 +29,10 @@ module.exports = {
     discount: {type:'number', defaultsTo:0},
     received_amount: {type:'number', defaultsTo:0},
     grand_total: {type:'number', defaultsTo:0},
-    status: {type:'number', defaultsTo:0}, //0-> pending, 10->paid, -10 -> cancelled, 20 ->bill finalized, 30->payment pending
+    status: {type:'number', defaultsTo:0}, //0-> pending, 10->paid, -10 -> cancelled, 20 ->bill finalized
     patient_admission:{model:'PatientAdmission'},
-    patient_appointment:{model:'PatientAppointment'}
+    patient_appointment:{model:'PatientAppointment'},
+    payment_type:{type:'number', defaultsTo:0}, //0-> cash, 1-> card
   },
 
 };

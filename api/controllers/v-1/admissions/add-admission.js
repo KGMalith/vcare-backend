@@ -108,7 +108,7 @@ module.exports = {
     }).fetch();
 
     //check hospital services apply to every bill
-    let services = await HospitalService.find({is_apply_to_every_admission:1});
+    let services = await HospitalService.find({is_apply_to_every_admission:1,status:1});
 
     //create hospital bill services
     if(services.length > 0){

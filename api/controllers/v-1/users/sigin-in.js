@@ -80,7 +80,7 @@ module.exports = {
       user_email:user_obj.email,
       user_role:user_obj.role_id,
       user_id:user_obj.id,
-      user_permissions:permissions
+      permissions:permissions
     };
 
     //generate jwt token

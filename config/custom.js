@@ -41,6 +41,8 @@ module.exports.custom = {
   patient_appointment_confirmed:17,
   doctor_new_appointment:18,
   appointment_cancelled:19,
+  bill_finalised:20,
+  bill_paid:21,
 
 
   //constants

@@ -31,8 +31,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -52,7 +52,7 @@ module.exports = {
     let contact = await EmployeeEmergencyContact.find({name:inputs.name.toLowerCase(),emp_id:inputs.emp_id});
 
     if(contact){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Employee enegency contact detail already exists!'
       });

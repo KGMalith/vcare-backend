@@ -20,8 +20,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -54,14 +54,14 @@ module.exports = {
     }
 
     if(user.hash_code && user.hash_code_expire  < current_timestamp){
-      exits.otherError({
+      exits.handleError({
         status:false,
         message:'Token expired!'
       });
     }
 
     if(user.is_invitation_sent == 1 && !user.hash_code){
-      exits.otherError({
+      exits.handleError({
         status:false,
         message:'Token expired!'
       });

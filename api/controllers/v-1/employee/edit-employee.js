@@ -86,8 +86,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -108,7 +108,7 @@ module.exports = {
     let is_exists = await Employee.findOne({user_id:inputs.user_id,id:{'!=':inputs.id}});
 
     if(is_exists){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Employee profile already exists for selected user'
       });
@@ -118,7 +118,7 @@ module.exports = {
     let is_nic_exists = await Employee.findOne({nic:inputs.nic,id:{'!=':inputs.id}});
 
     if(is_nic_exists){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Employee nic already taken'
       });
@@ -128,7 +128,7 @@ module.exports = {
     let is_email_exists = await Employee.findOne({email:inputs.email,id:{'!=':inputs.id}});
 
     if(is_email_exists){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Employee email already taken'
       });

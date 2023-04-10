@@ -28,8 +28,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -81,7 +81,7 @@ module.exports = {
     appointment_check_doctor = appointment_check_doctor.rows;
 
     if(appointment_check_doctor.length > 0){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Appointment exists for doctor in selected date & time!'
       });
@@ -93,7 +93,7 @@ module.exports = {
     appointment_check_patient = appointment_check_patient.rows;
 
     if(appointment_check_patient.length > 0){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Appointment exists for patient in selected date & time!'
       });

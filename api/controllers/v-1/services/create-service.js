@@ -35,8 +35,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -47,7 +47,7 @@ module.exports = {
     let service = await HospitalService.findOne({service_name:inputs.service_name.toLowerCase()});
 
     if(service){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Hospital service name already exists!'
       });

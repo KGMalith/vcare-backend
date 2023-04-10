@@ -32,8 +32,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -50,7 +50,7 @@ module.exports = {
     var patient_obj = await Patient.findOne({ email:inputs.email});
 
     if(user_obj || doctor_obj || patient_obj){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Email already exists!'
       });
@@ -95,7 +95,7 @@ module.exports = {
     let params = {
       USER_NAME:inputs.first_name+' '+inputs.last_name,
       ROLE:role_obj.role_name,
-      LINK:`${sails.config.custom.frontend_base_url}user/invitation/${hash_code}`
+      LINK:`${sails.config.custom.frontend_base_url}user/invitation?code=${hash_code}`
     };
 
     let respond = await sails.helpers.email.sendEmail.with({

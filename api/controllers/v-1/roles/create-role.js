@@ -27,8 +27,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -49,7 +49,7 @@ module.exports = {
 
     //return error if invalid id exists
     if(invalid_id_list.length > 0){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Invalid Permission Values!'
       });

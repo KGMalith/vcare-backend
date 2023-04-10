@@ -19,8 +19,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -42,7 +42,7 @@ module.exports = {
     });
 
     if(admission_list.length > 0){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Room cannot be delete!. Current room used for patient admissions'
       });

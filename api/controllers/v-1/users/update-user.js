@@ -35,8 +35,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -73,7 +73,7 @@ module.exports = {
     var patient_obj = await Patient.findOne({ email:inputs.email});
 
     if(user_obj || doctor_obj || patient_obj){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Email already taken!'
       });

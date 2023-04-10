@@ -24,8 +24,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -43,7 +43,7 @@ module.exports = {
 
     //check input status valid
     if(inputs.status !== sails.config.custom.user_active && inputs.status !== sails.config.custom.user_deactivated){
-      exits.otherError({
+      exits.handleError({
         status:false,
         message:'Invalid status code!'
       });
@@ -51,7 +51,7 @@ module.exports = {
 
     //check user account not acivated
     if(user.status === 0){
-      exits.otherError({
+      exits.handleError({
         status:false,
         message:'User account not activated!'
       });
@@ -59,7 +59,7 @@ module.exports = {
 
     //check status already updated
     if(user.status == inputs.status){
-      exits.otherError({
+      exits.handleError({
         status:false,
         message:'User status already updated!'
       });

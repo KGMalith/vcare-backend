@@ -32,8 +32,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -50,7 +50,7 @@ module.exports = {
     }
 
     if(inputs.id == 1){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'You have no permission to update Admin Role!'
       });

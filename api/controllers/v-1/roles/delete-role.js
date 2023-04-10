@@ -20,8 +20,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -38,7 +38,7 @@ module.exports = {
     }
 
     if(inputs.id == 1 || inputs.id == 2 || inputs.id == 3){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'You have no permission to delete Admin, Patient, Doctor Roles!'
       });
@@ -50,7 +50,7 @@ module.exports = {
     });
 
     if(users_list.length > 0){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Role cannot be delete!. Please remove role from assigned users before delete role'
       });

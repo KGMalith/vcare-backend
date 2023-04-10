@@ -16,8 +16,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -27,7 +27,7 @@ module.exports = {
     let user = Doctor.findOne({id:this.req.user.user_id});
 
     if(!user){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Invalid request!'
       });

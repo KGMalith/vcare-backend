@@ -24,8 +24,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -43,17 +43,17 @@ module.exports = {
       });
     }
 
-    if(user_obj.is_signup_completed == 0 && user_obj.is_email_confirmation_sent == 1){
-      return exits.otherError({
+    if(user_obj.is_signup_completed == 0){
+      return exits.handleError({
         status:false,
         message:'Signup not completed! Please find email in your inbox to continue signup'
       });
     }
 
-    let password_matched = await sails.helpers.auth.comparePassword(inputs.password,user_obj.password);
+    let password_matched = await sails.helpers.auth.comparePassword(user_obj.password,inputs.password);
 
     if(!password_matched){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Invalid email or password!'
       });
@@ -76,6 +76,7 @@ module.exports = {
       user_name:user_obj.first_name +' '+user_obj.last_name,
       user_email:user_obj.email,
       user_role:user_obj.role_id,
+      permissions:permissions,
       token:json_token
     };
 

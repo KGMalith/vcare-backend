@@ -19,8 +19,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -42,7 +42,7 @@ module.exports = {
     });
 
     if(bill_service_list.length > 0){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Service cannot be delete!. Current service used for billing'
       });

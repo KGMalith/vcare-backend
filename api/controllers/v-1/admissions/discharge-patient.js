@@ -20,8 +20,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -36,7 +36,7 @@ module.exports = {
     }
 
     if(admission.status != 1){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Patient already discharged!'
       });

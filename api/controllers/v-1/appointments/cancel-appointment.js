@@ -19,8 +19,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -50,7 +50,7 @@ module.exports = {
     let current_day = sails.moment.utc().format('YYYY-MM-DD HH:mm:ss');
 
     if(appointment.appointment_start_date < current_day){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Past appointments cannot cancelled!'
       });

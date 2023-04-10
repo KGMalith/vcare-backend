@@ -19,8 +19,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -39,7 +39,7 @@ module.exports = {
 
     let exployee_contacts = await EmployeeEmergencyContact.find();
     if(exployee_contacts.length > 0){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Employee profile cannot delete. Remove employee emegency contact details and try again!'
       });
@@ -47,7 +47,7 @@ module.exports = {
 
     let exployee_documents = await EmployeeDocument.find();
     if(exployee_documents.length > 0){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Employee profile cannot delete. Remove employee documents and try again!'
       });

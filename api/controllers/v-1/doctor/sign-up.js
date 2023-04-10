@@ -32,8 +32,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -50,7 +50,7 @@ module.exports = {
     var patient_obj = await Patient.findOne({ email:inputs.email});
 
     if(user_obj || doctor_obj || patient_obj){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Email already exists!'
       });
@@ -59,10 +59,10 @@ module.exports = {
     //get encrypted password
     let encrypted_password = await sails.helpers.auth.encryptPassword(inputs.password);
 
-    //generate patient code
+    //generate doctor code
     let doctor_code = await sails.helpers.other.generateId('DOC');
 
-    //create patient
+    //create doctor
     var doctor_obj = await Doctor.create({
       doctor_code:doctor_code,
       first_name:inputs.first_name,
@@ -75,7 +75,7 @@ module.exports = {
     let hash_code = await sails.helpers.other.encrypt(doctor_obj.id);
     let hash_code_expire = sails.moment().utc().add(24,'h').format('YYYY-MM-DD HH:mm:ss');
 
-    //update patient
+    //update doctor
     await Doctor.updateOne({id:doctor_obj.id}).set({
       hash_code:hash_code,
       hash_code_expire:hash_code_expire
@@ -84,7 +84,7 @@ module.exports = {
     //send email
     let params = {
       USER_NAME:inputs.first_name+' '+inputs.last_name,
-      LINK:`${sails.config.custom.frontend_base_url}doctor/email-verification/${hash_code}`
+      LINK:`${sails.config.custom.frontend_base_url}doctor/email-verification?code=${hash_code}`
     };
 
     let respond = await sails.helpers.email.sendEmail.with({
@@ -95,7 +95,7 @@ module.exports = {
     });
 
     if(respond.status){
-      //update patient as email sent
+      //update doctor as email sent
       await Doctor.updateOne({id:doctor_obj.id}).set({
         is_email_confirmation_sent:1,
       });

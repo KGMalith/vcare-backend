@@ -27,8 +27,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -39,7 +39,7 @@ module.exports = {
     let room = await HospitalRoom.findOne({room_number:inputs.room_number});
 
     if(room){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Room already exists!'
       });

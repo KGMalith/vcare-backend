@@ -19,8 +19,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -43,10 +43,10 @@ module.exports = {
       forgot_password_requested:0
     });
 
-    let hash_code = await sails.helpers.other.encrypt(patient_obj.id);
+    let hash_code = await sails.helpers.other.encrypt(user_obj.id);
     let hash_code_expire = sails.moment().utc().add(24,'h').format('YYYY-MM-DD HH:mm:ss');
 
-    //update patient
+    //update doctor
     await Doctor.updateOne({id:user_obj.id}).set({
       hash_code:hash_code,
       hash_code_expire:hash_code_expire,
@@ -55,7 +55,7 @@ module.exports = {
     //send email
     let params = {
       EMAIL:user_obj.email,
-      LINK:`${sails.config.custom.frontend_base_url}patient/email-verification/${hash_code}`
+      LINK:`${sails.config.custom.frontend_base_url}doctor/reset-password?code=${hash_code}`
     };
 
     let respond = await sails.helpers.email.sendEmail.with({
@@ -66,8 +66,8 @@ module.exports = {
     });
 
     if(respond.status){
-      //update patient as email sent
-      await Patient.updateOne({id:user_obj.id}).set({
+      //update doctor as email sent
+      await Doctor.updateOne({id:user_obj.id}).set({
         forgot_password_requested:1,
       });
     }

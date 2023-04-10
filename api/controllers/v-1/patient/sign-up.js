@@ -17,6 +17,10 @@ module.exports = {
       type:'string',
       required:true
     },
+    nic:{
+      type:'string',
+      required:true
+    },
     email:{
       type:'string',
       required:true
@@ -32,8 +36,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -50,9 +54,18 @@ module.exports = {
     var patient_obj = await Patient.findOne({ email:inputs.email});
 
     if(user_obj || doctor_obj || patient_obj){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Email already exists!'
+      });
+    }
+
+    var patient_obj = await Patient.findOne({ nic:inputs.nic});
+
+    if(patient_obj){
+      return exits.handleError({
+        status:false,
+        message:'Patient NIC already exists!'
       });
     }
 
@@ -70,6 +83,7 @@ module.exports = {
       email:inputs.email,
       password:encrypted_password,
       role_id:2,
+      nic:inputs.nic
     }).fetch();
 
     let hash_code = await sails.helpers.other.encrypt(patient_obj.id);
@@ -84,7 +98,7 @@ module.exports = {
     //send email
     let params = {
       USER_NAME:inputs.first_name+' '+inputs.last_name,
-      LINK:`${sails.config.custom.frontend_base_url}patient/email-verification/${hash_code}`
+      LINK:`${sails.config.custom.frontend_base_url}patient/email-verification?code=${hash_code}`
     };
 
     let respond = await sails.helpers.email.sendEmail.with({
@@ -104,6 +118,7 @@ module.exports = {
     // All done.
     return exits.success({
       status:true,
+      show_message:false,
       message:'Successfully signup to system. You will be receive email to confirm your email address!'
     });
 

@@ -19,8 +19,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -37,7 +37,7 @@ module.exports = {
     }
 
     //update patient
-    await Patient.updateOne({id:user_obj.id}).set({
+    let patient_obj = await Patient.updateOne({id:user_obj.id}).set({
       hash_code:null,
       hash_code_expire:null,
       forgot_password_requested:0
@@ -55,7 +55,7 @@ module.exports = {
     //send email
     let params = {
       EMAIL:user_obj.email,
-      LINK:`${sails.config.custom.frontend_base_url}patient/email-verification/${hash_code}`
+      LINK:`${sails.config.custom.frontend_base_url}patient/reset-password?code=${hash_code}`
     };
 
     let respond = await sails.helpers.email.sendEmail.with({

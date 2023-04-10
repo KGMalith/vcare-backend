@@ -133,4 +133,10 @@ module.exports.routes = {
   'GET /api/v1/admissions/get-all-admissions-patient': { action: 'v-1/admissions/get-all-admissions-patient' },
   'GET /api/v1/admissions/get-all-admissions': { action: 'v-1/admissions/get-all-admissions' },
   'POST /api/v1/admissions/update-admission': { action: 'v-1/admissions/update-admission' },
+
+  //===================== Bill  Endpoints ====================================
+  'POST /api/v1/bills/add-bill-services': { action: 'v-1/bills/add-bill-services' },
+  'POST /api/v1/bills/delete-bill-services': { action: 'v-1/bills/delete-bill-services' },
+  'POST /api/v1/bills/finialize-bill': { action: 'v-1/bills/finialize-bill' },
+  'POST /api/v1/bills/pay-bill': { action: 'v-1/bills/pay-bill' },
 };

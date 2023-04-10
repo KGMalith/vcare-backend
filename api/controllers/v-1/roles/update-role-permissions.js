@@ -28,8 +28,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -72,7 +72,7 @@ module.exports = {
 
     //check requested status valid
     if(inputs.status != sails.config.custom.role_permission_active && inputs.status != sails.config.custom.role_permission_deactive){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Invalid request status'
       });
@@ -80,7 +80,7 @@ module.exports = {
 
     //check permission status already updated
     if(role_permission.is_active == inputs.status){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Role permission already updated'
       });

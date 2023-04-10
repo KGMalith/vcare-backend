@@ -24,8 +24,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -43,7 +43,7 @@ module.exports = {
     }
 
     if(bill.status != 0){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Bill cannot update!'
       });
@@ -53,7 +53,7 @@ module.exports = {
     let service = await HospitalBillService.findOne({hospital_bill_id:inputs.bill_id,hospital_service_id:inputs.service_id});
 
     if(service){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Service already exists!'
       });
@@ -63,7 +63,7 @@ module.exports = {
     let hospital_service = await HospitalService.findOne({id:inputs.service_id});
 
     if(hospital_service.status == 0){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Service not active!'
       });

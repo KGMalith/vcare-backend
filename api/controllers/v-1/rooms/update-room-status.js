@@ -24,8 +24,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -43,7 +43,7 @@ module.exports = {
 
     //check status is valid
     if(inputs.status != sails.config.custom.hospital_room_available && inputs.status != sails.config.custom.hospital_room_taken && inputs.status != sails.config.custom.hospital_room_cleaning && inputs.status != sails.config.custom.hospital_room_closed_for_maintenance){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Invalid status!'
       });
@@ -51,7 +51,7 @@ module.exports = {
 
     //check already updated
     if(room_obj.room_status == inputs.status){
-      return exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Status already updated!'
       });

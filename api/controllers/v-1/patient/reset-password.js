@@ -24,8 +24,8 @@ module.exports = {
     notFound: {
       responseType: 'notFound'
     },
-    otherError:{
-      responseType: 'HandleError'
+    handleError:{
+      responseType: 'handleError'
     }
   },
 
@@ -37,13 +37,13 @@ module.exports = {
     //expire all tokens which are less than current time
     let current_timestamp = sails.moment().utc().format('YYYY-MM-DD HH:mm:ss');
 
-    const patients_sql = `SELECT t1.id FROM patients t1 WHERE t1.hash_code_expire < ${current_timestamp}`;
+    const patients_sql = `SELECT t1.id FROM patients t1 WHERE t1.hash_code_expire < '${current_timestamp}'`;
     var patient_id_list = await sails.sendNativeQuery(patients_sql);
     patient_id_list = patient_id_list.rows;
 
     if(patient_id_list.length > 0){
       for(let patient_id of patient_id_list){
-        const patient_update_sql = `UPDATE TABLE patients t1 SET t1.hash_code = NULL,hash_code_expire = NULL WHERE t1.id = ${patient_id}`;
+        const patient_update_sql = `UPDATE patients t1 SET t1.hash_code = NULL, t1.hash_code_expire = NULL WHERE t1.id = ${patient_id.id}`;
         await sails.sendNativeQuery(patient_update_sql);
       }
     }
@@ -51,21 +51,21 @@ module.exports = {
     //get patient object
     let patient = await Patient.findOne({id:patient_id,forgot_password_requested:1});
     if(!patient){
-      exits.notFound({
+      return exits.notFound({
         status:false,
         message:'Invalid token!'
       });
     }
 
     if(patient.hash_code && patient.hash_code_expire  < current_timestamp){
-      exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Token expired!'
       });
     }
 
     if(patient.forgot_password_requested == 1 && !patient.hash_code){
-      exits.otherError({
+      return exits.handleError({
         status:false,
         message:'Token expired!'
       });
@@ -80,7 +80,8 @@ module.exports = {
       hash_code:null,
       hash_code_expire:null,
       forgot_password_requested:0,
-      password:encrypted_password
+      password:encrypted_password,
+      is_signup_completed:1,
     });
 
     // All done.

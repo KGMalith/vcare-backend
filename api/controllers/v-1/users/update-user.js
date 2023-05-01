@@ -83,7 +83,8 @@ module.exports = {
     await User.updateOne({id:inputs.id}).set({
       first_name:inputs.first_name,
       last_name:inputs.last_name,
-      role_id:inputs.role_id
+      role_id:inputs.role_id,
+      email:inputs.email
     });
 
     // All done.

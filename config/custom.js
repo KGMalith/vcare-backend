@@ -26,7 +26,7 @@ module.exports.custom = {
   aws_employee_image_bucket:'',
   aws_employee_document_bucket:'',
   encryption_key:'d6nKFeuhB5puzMaV',
-  sendinblueSecret: '',
+  sendinblueSecret: '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',
   frontend_base_url:'http://localhost:3000/',
 
 

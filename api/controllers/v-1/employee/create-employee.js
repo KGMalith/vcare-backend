@@ -10,7 +10,7 @@ module.exports = {
   inputs: {
     user_id:{
       type:'number',
-      required:true
+      allowNull:true
     },
     is_user_account_exists:{
       type:'ref',
@@ -33,14 +33,14 @@ module.exports = {
       required:true
     },
     hired_date:{
-      type:'ref',
+      type:'string',
       required:true
     },
     end_date:{
-      type:'ref',
+      type:'string',
     },
     birthday:{
-      type:'ref',
+      type:'string',
       required:true
     },
     personal_mobile:{

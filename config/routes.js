@@ -38,11 +38,15 @@ module.exports.routes = {
 
   //Roles
   'POST /api/v1/roles/create-role': { action: 'v-1/roles/create-role' },
-  'DELETE /api/v1/roles/delete-role': { action: 'v-1/roles/delete-role' },
+  'POST /api/v1/roles/delete-role': { action: 'v-1/roles/delete-role' },
   'POST /api/v1/roles/edit-role': { action: 'v-1/roles/edit-role' },
   'GET /api/v1/roles/get-roles': { action: 'v-1/roles/get-all-roles' },
-  'GET /api/v1/roles/get-role': { action: 'v-1/roles/get-role-details' },
+  'POST /api/v1/roles/get-role': { action: 'v-1/roles/get-role-details' },
   'POST /api/v1/roles/update-role-permissions': { action: 'v-1/roles/update-role-permissions' },
+  'POST /api/v1/roles/get-role-permissions': { action: 'v-1/roles/get-role-permissions' },
+
+  //permissions
+  'GET /api/v1/permissions/get-permissions': { action: 'v-1/permissions/get-all-permissions' },
 
   //User
   'POST /api/v1/users/add-user': { action: 'v-1/users/add-user' },

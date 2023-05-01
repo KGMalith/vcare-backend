@@ -37,19 +37,20 @@ module.exports = {
     }
 
     //get all permissions link to role
-    let permission_list = await RolePermission.find({role_id:inputs.id});
+    let role_permissions = await RolePermission.find({role_id:inputs.id}).populate('permission_id');
 
-    //structure return obj
-    let return_obj = {
-      role:role_obj,
-      permissions:permission_list
-    };
+    let permission_list = [];
+    for(let role_permission of role_permissions){
+      permission_list.push(role_permission.permission_id);
+    }
+
+    role_obj.permissions = permission_list;
 
     // All done.
     return exits.success({
       status:true,
       message:'Role details generated successfully',
-      data:return_obj
+      data:role_obj
     });
 
   }

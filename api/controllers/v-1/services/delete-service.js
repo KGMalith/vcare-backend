@@ -49,7 +49,7 @@ module.exports = {
     }
 
     //delete service
-    await HospitalBillService.destroyOne({
+    await HospitalService.destroyOne({
       id:inputs.id
     });
 

@@ -30,7 +30,7 @@ module.exports = {
     let is_exists = await PatientDocument.findOne({id:inputs.id});
 
     if(!is_exists){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Employee document not found!'
       });

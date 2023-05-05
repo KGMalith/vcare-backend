@@ -49,7 +49,7 @@ module.exports = {
     //get patient object
     let patient = await Patient.findOne({id:patient_id,is_signup_completed:0});
     if(!patient){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid token!'
       });

@@ -29,7 +29,7 @@ module.exports = {
 
     let appointment = PatientAppointment.findOne({id:inputs.id,patient_id:this.req.user.user_id}).populate('patient_id').populate('doctor_id');
     if(!appointment){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Appointment not found!'
       });
@@ -41,7 +41,7 @@ module.exports = {
     if(respond.status){
       time_zone = respond.data;
     }else{
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Please setup default timezone!'
       });

@@ -42,7 +42,7 @@ module.exports = {
     let is_exists = await Employee.findOne({id:inputs.emp_id});
 
     if(!is_exists){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Employee profile not found!'
       });

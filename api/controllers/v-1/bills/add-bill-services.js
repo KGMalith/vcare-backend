@@ -36,7 +36,7 @@ module.exports = {
     let bill = await HospitalBill.findOne({id:inputs.bill_id});
 
     if(!bill){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid bill Id!'
       });

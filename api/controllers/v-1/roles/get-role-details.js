@@ -30,7 +30,7 @@ module.exports = {
     let role_obj = await Role.findOne({id:inputs.id});
 
     if(!role_obj){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid role id!'
       });

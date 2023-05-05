@@ -28,7 +28,7 @@ module.exports = {
     let patient = await Patient.findOne({id:this.req.user.user_id});
 
     if(!patient){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid request!'
       });

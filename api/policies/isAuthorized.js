@@ -8,10 +8,11 @@ module.exports = async function (req, res, next) {
   // > For more about where `req.me` comes from, check out this app's
   // > custom hook (`api/hooks/custom/index.js`).
   if (req.headers && req.headers.authorization) {
+    const authHeader = req.headers.authorization;
     const token = authHeader.split(' ')[1];
     try {
       const decodedToken = jwt.verify(token, sails.config.custom.jwt_secret);
-      req.user = decodedToken;
+      req.user = decodedToken.result;
       return next();
     } catch (error) {
       return res.status(401).send({ status:false, message: 'Invalid token' });

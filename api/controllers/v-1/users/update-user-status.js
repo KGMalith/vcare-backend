@@ -35,7 +35,7 @@ module.exports = {
     let user = await User.findOne({id:inputs.user_id});
 
     if(!user){
-      exits.notFound({
+      exits.handleError({
         status:false,
         message:'Invalid user id!'
       });
@@ -93,6 +93,7 @@ module.exports = {
     // All done.
     return exits.success({
       status:true,
+      show_message: true,
       message:'User account status updated successfully!'
     });
 

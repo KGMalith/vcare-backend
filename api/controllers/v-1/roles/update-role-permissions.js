@@ -42,7 +42,7 @@ module.exports = {
     });
 
     if(!role_obj){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid role id'
       });
@@ -51,7 +51,7 @@ module.exports = {
     let permission_obj = await Permission.findOne({id:inputs.permission_id});
 
     if(!permission_obj){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid permission id'
       });
@@ -64,7 +64,7 @@ module.exports = {
     });
 
     if(!role_permission){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Permission not assigned for role'
       });

@@ -17,6 +17,24 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': ['isAuthorized'], //Everything restrict here
+  '*': ['isAuthorized'], //Everything restrict here
 
+  'v-1/users': {
+    'sign-in': true,
+    'validate-token': true,
+  },
+  'v-1/patient': {
+    'sign-in': true,
+    'sign-up':true,
+    'forgot-password': true,
+    'reset-password':true,
+    'validate-token': true,
+  },
+  'v-1/doctor': {
+    'sign-in': true,
+    'sign-up':true,
+    'forgot-password': true,
+    'reset-password':true,
+    'validate-token': true,
+  },
 };

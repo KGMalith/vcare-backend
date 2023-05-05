@@ -51,7 +51,7 @@ module.exports = {
     //get doctor object
     let doctor = await Doctor.findOne({id:doctor_id,forgot_password_requested:1});
     if(!doctor){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid token!'
       });

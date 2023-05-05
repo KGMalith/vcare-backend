@@ -43,7 +43,7 @@ module.exports = {
     let is_exists = await Patient.findOne({id:inputs.patient_id});
 
     if(!is_exists){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Patient profile not found!'
       });

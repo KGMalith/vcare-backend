@@ -34,19 +34,19 @@ module.exports = {
     });
 
     if(!user){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid request!'
       });
     }
 
-    var settings = null;
-    //get settings
+    var timezone = null;
+    //get timezone
     if(this.req.user.user_role == 1){
-      var settings = await Settings.find();
+      var timezone = await Settings.findOne({type:'TimeZone'});
     }
 
-    user.settings = settings;
+    user.timezone = timezone?timezone.value:null;
 
     // All done.
     return exits.success({

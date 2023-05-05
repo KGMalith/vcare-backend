@@ -43,7 +43,7 @@ module.exports = {
     let patient = await Patient.findOne({id:inputs.patient_id});
 
     if(!patient){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid patient Id!'
       });
@@ -54,7 +54,7 @@ module.exports = {
       let doctorObj = await Doctor.findOne({id:doctor});
 
       if(!doctorObj){
-        return exits.notFound({
+        return exits.handleError({
           status:false,
           message:'Invalid doctor Id!'
         });
@@ -65,7 +65,7 @@ module.exports = {
     let room = await HospitalRoom.findOne({id:inputs.room_id,room_status:1});
 
     if(!room){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Room not available!'
       });

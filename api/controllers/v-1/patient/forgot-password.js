@@ -30,7 +30,7 @@ module.exports = {
     let user_obj = await Patient.findOne({email:inputs.email});
 
     if(!user_obj){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'There is no user associated with given email!'
       });

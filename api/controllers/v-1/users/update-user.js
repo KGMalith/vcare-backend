@@ -49,7 +49,7 @@ module.exports = {
     });
 
     if(!user){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid user id!'
       });
@@ -59,7 +59,7 @@ module.exports = {
     let role_obj = await Role.findOne({id:inputs.role_id});
 
     if(!role_obj){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid role id!'
       });
@@ -90,6 +90,7 @@ module.exports = {
     // All done.
     return exits.success({
       status:true,
+      show_message: true,
       message:'User updated successfully!'
     });
 

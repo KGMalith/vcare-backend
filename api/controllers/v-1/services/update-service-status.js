@@ -35,7 +35,7 @@ module.exports = {
     let service_obj = await HospitalService.findOne({id:inputs.id});
 
     if(!service_obj){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid service id!'
       });

@@ -33,35 +33,35 @@ module.exports = {
     //expire all tokens which are less than current time
     let current_timestamp = sails.moment().utc().format('YYYY-MM-DD HH:mm:ss');
 
-    const users_sql = `SELECT t1.id FROM users t1 WHERE t1.hash_code_expire < ${current_timestamp}`;
+    const users_sql = `SELECT t1.id FROM users t1 WHERE t1.hash_code_expire < '${current_timestamp}'`;
     var user_id_list = await sails.sendNativeQuery(users_sql);
     user_id_list = user_id_list.rows;
 
     if(user_id_list.length > 0){
       for(let user_id of user_id_list){
-        const user_update_sql = `UPDATE TABLE users t1 SET t1.hash_code = NULL,hash_code_expire = NULL WHERE t1.id = ${user_id}`;
+        const user_update_sql = `UPDATE users t1 SET t1.hash_code = NULL, t1.hash_code_expire = NULL WHERE t1.id = ${user_id}`;
         await sails.sendNativeQuery(user_update_sql);
       }
     }
 
     //get user object
-    let user = await User.findOne({id:user_id});
+    let user = await User.findOne({id:user_id,is_signup_completed:0});
     if(!user){
-      exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid token!'
       });
     }
 
     if(user.hash_code && user.hash_code_expire  < current_timestamp){
-      exits.handleError({
+      return exits.handleError({
         status:false,
         message:'Token expired!'
       });
     }
 
     if(user.is_invitation_sent == 1 && !user.hash_code){
-      exits.handleError({
+      return exits.handleError({
         status:false,
         message:'Token expired!'
       });

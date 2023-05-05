@@ -35,14 +35,14 @@ module.exports = {
     let bill = await HospitalBill.findOne({ id: inputs.id }).populate('patient_admission').populate('patient_appointment');
 
     if (!bill) {
-      return exits.notFound({
+      return exits.handleError({
         status: false,
         message: 'Invalid bill Id!'
       });
     }
 
     if(bill.status != 20){
-      return exits.notFound({
+      return exits.handleError({
         status: false,
         message: 'Payment cannot be made for selected bill'
       });

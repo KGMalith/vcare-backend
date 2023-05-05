@@ -38,7 +38,7 @@ module.exports = {
     let bill = await HospitalBill.findOne({ id: inputs.id }).populate('patient_admission').populate('patient_appointment');
 
     if (!bill) {
-      return exits.notFound({
+      return exits.handleError({
         status: false,
         message: 'Invalid bill Id!'
       });
@@ -50,7 +50,7 @@ module.exports = {
     if (respond.status) {
       time_zone = respond.data;
     } else {
-      return exits.notFound({
+      return exits.handleError({
         status: false,
         message: 'Please setup default timezone!'
       });

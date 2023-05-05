@@ -34,9 +34,9 @@ module.exports = {
     let user_id = await sails.helpers.other.decrypt(inputs.token);
 
     //get user object
-    let user = await User.findOne({id:user_id});
+    let user = await User.findOne({id:user_id, is_signup_completed:0});
     if(!user){
-      exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid token!'
       });

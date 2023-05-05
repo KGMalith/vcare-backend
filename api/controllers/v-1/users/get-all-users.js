@@ -20,7 +20,7 @@ module.exports = {
   fn: async function (inputs,exits) {
 
     //get all users
-    let users_list = await User.find();
+    let users_list = await User.find().populate('role_id');
 
     // All done.
     return exits.success({

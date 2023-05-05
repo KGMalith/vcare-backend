@@ -40,7 +40,7 @@ module.exports.routes = {
   'POST /api/v1/roles/create-role': { action: 'v-1/roles/create-role' },
   'POST /api/v1/roles/delete-role': { action: 'v-1/roles/delete-role' },
   'POST /api/v1/roles/edit-role': { action: 'v-1/roles/edit-role' },
-  'GET /api/v1/roles/get-roles': { action: 'v-1/roles/get-all-roles' },
+  'POST /api/v1/roles/get-roles': { action: 'v-1/roles/get-all-roles' },
   'POST /api/v1/roles/get-role': { action: 'v-1/roles/get-role-details' },
   'POST /api/v1/roles/update-role-permissions': { action: 'v-1/roles/update-role-permissions' },
   'POST /api/v1/roles/get-role-permissions': { action: 'v-1/roles/get-role-permissions' },
@@ -52,12 +52,13 @@ module.exports.routes = {
   'POST /api/v1/users/add-user': { action: 'v-1/users/add-user' },
   'GET /api/v1/users/get-users': { action: 'v-1/users/get-all-users' },
   'POST /api/v1/users/setup-password': { action: 'v-1/users/setup-password' },
-  'POST /api/v1/users/sigin-in': { action: 'v-1/users/sigin-in' },
+  'POST /api/v1/users/sign-in': { action: 'v-1/users/sign-in' },
   'POST /api/v1/users/update-profile': { action: 'v-1/users/update-profile' },
   'POST /api/v1/users/update-user-status': { action: 'v-1/users/update-user-status' },
   'POST /api/v1/users/update-user': { action: 'v-1/users/update-user' },
   'POST /api/v1/users/upload-profile-image': { action: 'v-1/users/upload-profile-image' },
   'POST /api/v1/users/validate-token': { action: 'v-1/users/validate-token' },
+  'GET /api/v1/users/get-profile-details': { action: 'v-1/users/get-profile-details' },
 
   //Rooms
   'POST /api/v1/rooms/create-room': { action: 'v-1/rooms/create-room' },
@@ -69,7 +70,7 @@ module.exports.routes = {
 
   //Services
   'POST /api/v1/services/create-service': { action: 'v-1/services/create-service' },
-  'DELETE /api/v1/services/delete-room': { action: 'v-1/services/delete-room' },
+  'DELETE /api/v1/services/delete-room': { action: 'v-1/services/delete-service' },
   'POST /api/v1/services/edit-service': { action: 'v-1/services/edit-service' },
   'GET /api/v1/services/get-all-services': { action: 'v-1/services/get-all-services' },
   'GET /api/v1/services/get-service-details': { action: 'v-1/services/get-service-details' },
@@ -100,6 +101,7 @@ module.exports.routes = {
   'POST /api/v1/patient/update-profile': { action: 'v-1/patient/update-profile' },
   'POST /api/v1/patient/upload-profile-image': { action: 'v-1/patient/upload-profile-image' },
   'POST /api/v1/patient/validate-token': { action: 'v-1/patient/validate-token' },
+  'GET /api/v1/patient/get-profile-details': { action: 'v-1/patient/get-profile-details' },
 
   'POST /api/v1/patient/contact/add-contact': { action: 'v-1/patient/contact/add-contact' },
   'DELETE /api/v1/patient/contact/delete-contact': { action: 'v-1/patient/contact/delete-contact' },
@@ -116,8 +118,9 @@ module.exports.routes = {
   'POST /api/v1/doctor/sign-in': { action: 'v-1/doctor/sign-in' },
   'POST /api/v1/doctor/sign-up': { action: 'v-1/doctor/sign-up' },
   'POST /api/v1/doctor/update-profile': { action: 'v-1/doctor/update-profile' },
-  'POST /api/v1/doctor/upload-profile-image': { action: 'v-1/doctor/upload-profile-image' },
+  'POST /api/v1/doctor/upload-profile-image': { action: 'v-1/doctor/upload-profie-image' },
   'POST /api/v1/doctor/validate-token': { action: 'v-1/doctor/validate-token' },
+  'GET /api/v1/doctor/get-profile-details': { action: 'v-1/doctor/get-profile-details' },
 
   //===================== Appointments  Endpoints ====================================
 
@@ -143,4 +146,7 @@ module.exports.routes = {
   'POST /api/v1/bills/delete-bill-services': { action: 'v-1/bills/delete-bill-services' },
   'POST /api/v1/bills/finialize-bill': { action: 'v-1/bills/finialize-bill' },
   'POST /api/v1/bills/pay-bill': { action: 'v-1/bills/pay-bill' },
+
+  //settings
+  'POST /api/v1/settings/update-timezone': { action: 'v-1/settings/update-timezone' },
 };

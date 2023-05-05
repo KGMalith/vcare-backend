@@ -29,7 +29,7 @@ module.exports = {
   fn: async function (inputs,exits) {
     let admission = PatientAdmission.findOne({id:inputs.id});
     if(!admission){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid admission Id!'
       });

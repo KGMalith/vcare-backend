@@ -35,7 +35,7 @@ module.exports = {
     let patient = await Patient.findOne({id:this.req.user.user_id});
 
     if(!patient){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid request!'
       });
@@ -44,7 +44,7 @@ module.exports = {
     let doctor = await Doctor.findOne({id:inputs.doctor_id});
 
     if(!doctor){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid doctor Id!'
       });
@@ -56,7 +56,7 @@ module.exports = {
     if(respond.status){
       time_zone = respond.data;
     }else{
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Please setup default timezone!'
       });

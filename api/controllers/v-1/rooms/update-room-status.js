@@ -35,7 +35,7 @@ module.exports = {
     let room_obj = await HospitalRoom.findOne({id:inputs.id});
 
     if(!room_obj){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid room id!'
       });

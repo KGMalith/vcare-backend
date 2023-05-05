@@ -37,7 +37,7 @@ module.exports = {
     });
 
     if(!user){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid user id!'
       });

@@ -37,7 +37,7 @@ module.exports = {
     let user_obj = await User.findOne({email:inputs.email});
 
     if(!user_obj){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid email or password!'
       });
@@ -76,11 +76,15 @@ module.exports = {
     //get all permissions related to role
     let permissions = await RolePermission.find({select:['permission_id'],where:{role_id:user_obj.role_id,is_active:sails.config.custom.role_permission_active}});
 
+    //get timezone
+    let timezone = await Settings.findOne({type:'TimeZone'});
+
     const token_body = {
       user_email:user_obj.email,
       user_role:user_obj.role_id,
       user_id:user_obj.id,
-      permissions:permissions
+      permissions:permissions,
+      timezone:timezone ? timezone.value : null
     };
 
     //generate jwt token

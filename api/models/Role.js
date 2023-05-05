@@ -24,7 +24,7 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-    role_name: {type:'string', required:true},
+    role_name: {type:'string', required:true}, //Admin ->1 Patient->2 Doctor->3
     role_desc: {type:'string', required:true},
   },
 

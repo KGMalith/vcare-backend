@@ -48,7 +48,7 @@ module.exports = {
     let user = await Doctor.findOne({id:this.req.user.user_id});
 
     if(!user){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid user!'
       });

@@ -1,7 +1,11 @@
+/* eslint-disable no-redeclare */
+/* eslint-disable block-scoped-var */
+/* eslint-disable no-unused-vars */
+/* eslint-disable eqeqeq */
 module.exports = {
 
 
-  friendlyName: 'Get all appointments patient',
+  friendlyName: 'Get profile details',
 
 
   description: '',
@@ -23,28 +27,25 @@ module.exports = {
 
 
   fn: async function (inputs,exits) {
-    //take patient id
-    let patient = await Patient.findOne({id:this.req.user.user_id});
 
-    if(!patient){
+    //check email already exists
+    var user = await Patient.findOne({
+      id:this.req.user.user_id
+    });
+
+    if(!user){
       return exits.handleError({
         status:false,
         message:'Invalid request!'
       });
     }
 
-
-    //get appointments
-    let appointments = await PatientAppointment.find({patient_id:this.req.user.user_id}).populate('patient_id').populate('doctor_id');
-
     // All done.
     return exits.success({
       status:true,
-      message:'Appointments generated successfully!',
-      data:appointments
+      message:'Profile details generated successfully!',
+      data:user
     });
 
   }
-
-
 };

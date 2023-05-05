@@ -98,7 +98,7 @@ module.exports = {
     let employee_obj = await Employee.findOne({id:inputs.id});
 
     if(!employee_obj){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid employee id'
       });

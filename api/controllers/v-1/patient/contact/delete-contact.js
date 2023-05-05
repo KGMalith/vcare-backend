@@ -31,7 +31,7 @@ module.exports = {
     let is_exists = await PatientEmergencyContact.findOne({id:inputs.id});
 
     if(!is_exists){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid enegency contact id!'
       });

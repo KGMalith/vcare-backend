@@ -28,7 +28,7 @@ module.exports = {
   fn: async function (inputs,exits) {
     let appointment = PatientAppointment.findOne({id:inputs.id}).populate('patient_id').populate('doctor_id');
     if(!appointment){
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Invalid appointment Id!'
       });
@@ -40,7 +40,7 @@ module.exports = {
     if(respond.status){
       time_zone = respond.data;
     }else{
-      return exits.notFound({
+      return exits.handleError({
         status:false,
         message:'Please setup default timezone!'
       });

@@ -70,10 +70,10 @@ module.exports.routes = {
 
   //Services
   'POST /api/v1/services/create-service': { action: 'v-1/services/create-service' },
-  'DELETE /api/v1/services/delete-room': { action: 'v-1/services/delete-service' },
+  'POST /api/v1/services/delete-service': { action: 'v-1/services/delete-service' },
   'POST /api/v1/services/edit-service': { action: 'v-1/services/edit-service' },
   'GET /api/v1/services/get-all-services': { action: 'v-1/services/get-all-services' },
-  'GET /api/v1/services/get-service-details': { action: 'v-1/services/get-service-details' },
+  'POST /api/v1/services/get-service-details': { action: 'v-1/services/get-service-details' },
   'POST /api/v1/services/update-service-status': { action: 'v-1/services/update-service-status' },
 
   //Employee

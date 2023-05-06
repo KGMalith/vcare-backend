@@ -58,6 +58,7 @@ module.exports = {
 
     return exits.success({
       status:true,
+      show_message: true,
       message:'Employee profile deleted successfully!'
     });
 

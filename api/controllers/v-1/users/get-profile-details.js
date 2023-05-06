@@ -42,7 +42,7 @@ module.exports = {
 
     var timezone = null;
     //get timezone
-    if(this.req.user.user_role == 1){
+    if(this.req.user.user_role == sails.config.custom.admin_role_id){
       var timezone = await Settings.findOne({type:'TimeZone'});
     }
 

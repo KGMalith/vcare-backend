@@ -12,10 +12,6 @@ module.exports = {
       type:'string',
       required:true
     },
-    dir:{
-      type:'string',
-      required:true
-    },
     file_name:{
       type:'string',
       required:true
@@ -44,7 +40,7 @@ module.exports = {
 
     const params = {
       Bucket:inputs.bucket,
-      Key:inputs.dir+'/'+inputs.file_name
+      Key:inputs.file_name
     };
 
     try {

@@ -37,17 +37,38 @@ module.exports = {
       });
     }
 
-    let employee_sql = `SELECT t1.*,t2.user_code,t2.role_id FROM employees t1 `+
-    `LEFT JOIN users t2 ON t1.user_id = t2.id WHERE t1.id = ${inputs.id}`;
+    if(employee_obj.image){
+      let respond = await sails.helpers.s3.getObject.with({
+        bucket:sails.config.custom.s3_bucket,
+        file_name:employee_obj.image,
+        is_expire:false
+      });
+      employee_obj.image_url = respond.data;
+    }else{
+      employee_obj.image_url = null;
+    }
 
-    let employee = await sails.sendNativeQuery(employee_sql);
-    employee = employee.rows[0];
+    let employeeDocuments = await EmployeeDocument.find({emp_id:employee_obj.id});
+
+    for(let employeeDocument of employeeDocuments){
+      let respond = await sails.helpers.s3.getObject.with({
+        bucket:sails.config.custom.s3_bucket,
+        file_name:employeeDocument.document_URL,
+        is_expire:true
+      });
+      employeeDocument.url = respond.data;
+    }
+
+    let employeeContacts = await EmployeeEmergencyContact.find({emp_id:employee_obj.id});
+
+    employee_obj.documents = employeeDocuments;
+    employee_obj.contacts = employeeContacts;
 
     // All done.
     return exits.success({
       status:true,
       message:'Employee details generated successfully!',
-      data:employee
+      data:employee_obj
     });
   }
 };

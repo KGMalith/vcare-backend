@@ -79,16 +79,17 @@ module.exports.routes = {
   //Employee
   'POST /api/v1/employee/create-employee': { action: 'v-1/employee/create-employee' },
   'POST /api/v1/employee/edit-employee': { action: 'v-1/employee/edit-employee' },
-  'DELETE /api/v1/employee/delete-employee': { action: 'v-1/employee/delete-employee' },
+  'POST /api/v1/employee/delete-employee': { action: 'v-1/employee/delete-employee' },
   'GET /api/v1/employee/get-all-employees': { action: 'v-1/employee/get-all-employees' },
-  'GET /api/v1/employee/get-employee': { action: 'v-1/employee/get-employee' },
-  'GET /api/v1/employee/upload-employee-image': { action: 'v-1/employee/upload-employee-image' },
+  'POST /api/v1/employee/get-employee': { action: 'v-1/employee/get-employee' },
+  'POST /api/v1/employee/upload-employee-images': { action: 'v-1/employee/upload-employee-images' },
+  'POST /api/v1/employee/set-employee-image': { action: 'v-1/employee/set-employee-image' },
 
   'POST /api/v1/employee/contact/add-contact': { action: 'v-1/employee/contact/add-contact' },
-  'DELETE /api/v1/employee/contact/delete-contact': { action: 'v-1/employee/contact/delete-contact' },
+  'POST /api/v1/employee/contact/delete-contact': { action: 'v-1/employee/contact/delete-contact' },
 
   'POST /api/v1/employee/documents/create-document': { action: 'v-1/employee/documents/create-document' },
-  'DELETE /api/v1/employee/documents/delete-document': { action: 'v-1/employee/documents/delete-document' },
+  'POST /api/v1/employee/documents/delete-document': { action: 'v-1/employee/documents/delete-document' },
   'POST /api/v1/employee/documents/upload-document': { action: 'v-1/employee/documents/upload-document' },
 
   //===================== Patient  Endpoints ====================================

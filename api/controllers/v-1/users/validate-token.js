@@ -45,7 +45,7 @@ module.exports = {
     }
 
     //get user object
-    let user = await User.findOne({id:user_id,is_signup_completed:0});
+    let user = await User.findOne({id:user_id,is_signup_completed:sails.config.custom.user_signup_incomplete});
     if(!user){
       return exits.handleError({
         status:false,
@@ -60,7 +60,7 @@ module.exports = {
       });
     }
 
-    if(user.is_invitation_sent == 1 && !user.hash_code){
+    if(user.is_invitation_sent == sails.config.custom.user_invitation_sent && !user.hash_code){
       return exits.handleError({
         status:false,
         message:'Token expired!'

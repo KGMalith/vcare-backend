@@ -50,7 +50,7 @@ module.exports = {
     }
 
     //check user account not acivated
-    if(user.status === 0){
+    if(user.status === sails.config.custom.user_deactivated){
       exits.handleError({
         status:false,
         message:'User account not activated!'

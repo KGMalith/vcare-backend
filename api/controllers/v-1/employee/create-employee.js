@@ -13,7 +13,7 @@ module.exports = {
       allowNull:true
     },
     is_user_account_exists:{
-      type:'ref',
+      type:'boolean',
       required:true
     },
     first_name:{
@@ -133,7 +133,7 @@ module.exports = {
     await Employee.create({
       emp_code:employee_code,
       user_id:inputs.user_id,
-      is_user_account_exists:inputs.is_user_account_exists?1:0,
+      is_user_account_exists:inputs.is_user_account_exists?sails.config.custom.user_account_available:sails.config.custom.user_account_not_available,
       first_name:inputs.first_name,
       last_name:inputs.last_name,
       email:inputs.email,
@@ -154,6 +154,7 @@ module.exports = {
     // All done.
     return exits.success({
       status:true,
+      show_message: true,
       message:'Employee created successfully!'
     });
 

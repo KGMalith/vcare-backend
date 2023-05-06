@@ -48,8 +48,9 @@ module.exports = {
       });
     }
 
+    let name = inputs.name.toLowerCase();
     //check input data already exists
-    let contact = await EmployeeEmergencyContact.find({name:inputs.name.toLowerCase(),emp_id:inputs.emp_id});
+    let contact = await EmployeeEmergencyContact.findOne({name:name,emp_id:inputs.emp_id});
 
     if(contact){
       return exits.handleError({
@@ -69,6 +70,7 @@ module.exports = {
     // All done.
     return exits.success({
       status:true,
+      show_message: true,
       message:'Employee emergency contact created successfully!'
     });
 

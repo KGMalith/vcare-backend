@@ -62,10 +62,10 @@ module.exports.routes = {
 
   //Rooms
   'POST /api/v1/rooms/create-room': { action: 'v-1/rooms/create-room' },
-  'DELETE /api/v1/rooms/delete-room': { action: 'v-1/rooms/delete-room' },
+  'POST /api/v1/rooms/delete-room': { action: 'v-1/rooms/delete-room' },
   'POST /api/v1/rooms/edit-room': { action: 'v-1/rooms/edit-room' },
   'GET /api/v1/rooms/get-all-rooms': { action: 'v-1/rooms/get-all-rooms' },
-  'GET /api/v1/rooms/get-room-details': { action: 'v-1/rooms/get-room-details' },
+  'POST /api/v1/rooms/get-room-details': { action: 'v-1/rooms/get-room-details' },
   'POST /api/v1/rooms/update-room-status': { action: 'v-1/rooms/update-room-status' },
 
   //Services

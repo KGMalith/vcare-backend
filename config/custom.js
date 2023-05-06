@@ -62,6 +62,7 @@ module.exports.custom = {
   hospital_room_taken:10,
   hospital_room_cleaning:0,
   hospital_room_closed_for_maintenance:-10,
+  hospital_room_waiting_for_cleaning:20,
 
   hospital_service_active:1,
   hospital_service_inactive:0,

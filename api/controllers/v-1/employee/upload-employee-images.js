@@ -29,6 +29,7 @@ module.exports = {
       if (err) {return res.serverError(err);}
       return exits.success({
         status:true,
+        show_message: true,
         fileinfo: filesUploaded
       });
     });

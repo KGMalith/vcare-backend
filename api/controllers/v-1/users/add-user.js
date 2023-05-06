@@ -108,7 +108,7 @@ module.exports = {
     if(respond.status){
       //update user as email sent
       await User.updateOne({id:user_obj.id}).set({
-        is_invitation_sent:1,
+        is_invitation_sent:sails.config.custom.user_invitation_sent,
       });
     }
 

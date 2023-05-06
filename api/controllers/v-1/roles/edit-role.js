@@ -49,7 +49,7 @@ module.exports = {
       });
     }
 
-    if(inputs.id == 1){
+    if(inputs.id == sails.config.custom.admin_role_id){
       return exits.handleError({
         status:false,
         message:'You have no permission to update Admin Role!'

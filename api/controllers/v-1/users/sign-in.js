@@ -57,7 +57,7 @@ module.exports = {
       });
     }
 
-    if(user_obj.is_password_reset_requested == 1 && user_obj.hash_code){
+    if(user_obj.is_password_reset_requested == sails.config.custom.user_password_reset_request_active && user_obj.hash_code){
       return exits.handleError({
         status:false,
         message:'Admin reset your password! Please check inbox to proceed'
@@ -76,25 +76,25 @@ module.exports = {
     //get all permissions related to role
     let permissions = await RolePermission.find({select:['permission_id'],where:{role_id:user_obj.role_id,is_active:sails.config.custom.role_permission_active}});
 
-    //get timezone
-    let timezone = await Settings.findOne({type:'TimeZone'});
-
     const token_body = {
       user_email:user_obj.email,
       user_role:user_obj.role_id,
       user_id:user_obj.id,
       permissions:permissions,
-      timezone:timezone ? timezone.value : null
     };
 
     //generate jwt token
     const json_token = jwt.sign({result:token_body},sails.config.custom.jwt_secret);
+
+    //get timezone
+    let timezone = await Settings.findOne({type:'TimeZone'});
 
     const data = {
       user_name:user_obj.first_name +' '+user_obj.last_name,
       user_email:user_obj.email,
       user_role:user_obj.role_id,
       permissions:permissions,
+      timezone:timezone ? timezone.value : null,
       token:json_token
     };
 

@@ -34,7 +34,7 @@ module.exports = {
     let user_id = await sails.helpers.other.decrypt(inputs.token);
 
     //get user object
-    let user = await User.findOne({id:user_id, is_signup_completed:0});
+    let user = await User.findOne({id:user_id, is_signup_completed:sails.config.custom.user_signup_incomplete});
     if(!user){
       return exits.handleError({
         status:false,
@@ -49,10 +49,10 @@ module.exports = {
     await User.updateOne({id:user_id}).set({
       hash_code:null,
       hash_code_expire:null,
-      is_signup_completed:1,
+      is_signup_completed:sails.config.custom.user_signup_complete,
       password:encrypted_password,
-      is_password_reset_requested:0,
-      status:1,
+      is_password_reset_requested:sails.config.custom.user_password_reset_request_inactive,
+      status:sails.config.custom.user_active,
     });
 
     // All done.

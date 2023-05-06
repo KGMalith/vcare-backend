@@ -37,7 +37,7 @@ module.exports = {
       });
     }
 
-    if(inputs.id == 1 || inputs.id == 2 || inputs.id == 3){
+    if(inputs.id == sails.config.custom.admin_role_id || inputs.id == sails.config.custom.patient_role_id || inputs.id == sails.config.custom.doctor_role_id){
       return exits.handleError({
         status:false,
         message:'You have no permission to delete Admin, Patient, Doctor Roles!'

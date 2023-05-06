@@ -20,12 +20,16 @@ module.exports = {
 
   fn: async function (inputs,exits) {
     //employees list
-    let employee_list_sql =  `SELECT t1.*,t2.user_code,t2.role_id FROM employees t1 `+
-    `LEFT JOIN users t2 ON t1.user_id = t2.id `;
+    let employees = await Employee.find();
 
-    let employees = await sails.sendNativeQuery(employee_list_sql);
-    employees = employees.rows;
-
+    for(let employee of employees){
+      if(employee.user_id){
+        let userObj = await User.findOne({id:employee.user_id}).populate('role_id');
+        employee.user_id = userObj;
+      }else{
+        employee.user_id = null;
+      }
+    }
 
     // All done.
     return exits.success({

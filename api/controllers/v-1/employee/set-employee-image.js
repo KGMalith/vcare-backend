@@ -1,7 +1,7 @@
 module.exports = {
 
 
-  friendlyName: 'Delete contact',
+  friendlyName: 'Set employee image',
 
 
   description: '',
@@ -11,7 +11,11 @@ module.exports = {
     id:{
       type:'number',
       required:true
-    }
+    },
+    image_fd:{
+      type:'string',
+      required:true
+    },
   },
 
 
@@ -27,25 +31,27 @@ module.exports = {
 
   fn: async function (inputs,exits) {
 
-    //check employee contact
-    let is_exists = await EmployeeEmergencyContact.findOne({id:inputs.id});
+    //check id is valid
+    let employee_obj = await Employee.findOne({id:inputs.id});
 
-    if(!is_exists){
+    if(!employee_obj){
       return exits.handleError({
         status:false,
-        message:'Invalid enegency contact id!'
+        message:'Invalid employee id'
       });
     }
 
-    //delete enegency contact
-    await EmployeeEmergencyContact.destroyOne({id:inputs.id});
+    //update user
+    await Employee.updateOne({id:inputs.id}).set({
+      image:inputs.image_fd,
+    });
 
     // All done.
     return exits.success({
       status:true,
       show_message: true,
-      message:'Emegency contact deleted successfully!'
+      message:'Employee image uploaded successfully!'
     });
-
   }
 };
+

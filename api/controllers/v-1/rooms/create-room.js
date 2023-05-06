@@ -55,6 +55,7 @@ module.exports = {
     // All done.
     return exits.success({
       status:true,
+      show_message: true,
       message:'Room created successfully!'
     });
 

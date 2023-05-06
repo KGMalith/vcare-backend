@@ -42,7 +42,7 @@ module.exports = {
     }
 
     //check status is valid
-    if(inputs.status != sails.config.custom.hospital_room_available && inputs.status != sails.config.custom.hospital_room_taken && inputs.status != sails.config.custom.hospital_room_cleaning && inputs.status != sails.config.custom.hospital_room_closed_for_maintenance){
+    if(inputs.status != sails.config.custom.hospital_room_available && inputs.status != sails.config.custom.hospital_room_taken && inputs.status != sails.config.custom.hospital_room_cleaning && inputs.status != sails.config.custom.hospital_room_closed_for_maintenance && inputs.status != sails.config.custom.hospital_room_waiting_for_cleaning){
       return exits.handleError({
         status:false,
         message:'Invalid status!'

@@ -68,8 +68,8 @@ module.exports = {
     });
 
     //convert to timezone to send email notification
-    let converted_start_time = sails.moment_tz.tz(appointment.appointment_start_date,time_zone).format('YYYY-MM-DD HH:mm A');
-    let converted_end_time = sails.moment_tz.tz(appointment.appointment_end_date,time_zone).format('YYYY-MM-DD HH:mm A');
+    let converted_start_time = sails.moment(appointment.appointment_start_date).tz(time_zone).format('YYYY-MM-DD hh:mm A');
+    let converted_end_time = sails.moment(appointment.appointment_end_date).tz(time_zone).format('YYYY-MM-DD hh:mm A');
 
     //send appoinment cancel emails
 

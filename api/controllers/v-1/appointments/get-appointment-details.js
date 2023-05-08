@@ -28,7 +28,11 @@ module.exports = {
   fn: async function (inputs,exits) {
 
     //get appointments
-    let appointment = await PatientAppointment.find({id:inputs.id}).populate('patient_id').populate('doctor_id');
+    let appointment = await PatientAppointment.findOne({id:inputs.id}).populate('patient_id').populate('doctor_id');
+
+    let bill = await HospitalBill.findOne({select:['id','bill_code'],where:{patient_appointment:appointment.id}});
+
+    appointment.bill = bill;
 
     // All done.
     return exits.success({

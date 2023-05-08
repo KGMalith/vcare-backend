@@ -103,6 +103,7 @@ module.exports.routes = {
   'POST /api/v1/patient/upload-profile-image': { action: 'v-1/patient/upload-profile-image' },
   'POST /api/v1/patient/validate-token': { action: 'v-1/patient/validate-token' },
   'GET /api/v1/patient/get-profile-details': { action: 'v-1/patient/get-profile-details' },
+  'GET /api/v1/patient/get-all-patients': { action: 'v-1/patient/get-all-patients' },
 
   'POST /api/v1/patient/contact/add-contact': { action: 'v-1/patient/contact/add-contact' },
   'DELETE /api/v1/patient/contact/delete-contact': { action: 'v-1/patient/contact/delete-contact' },
@@ -122,6 +123,7 @@ module.exports.routes = {
   'POST /api/v1/doctor/upload-profile-image': { action: 'v-1/doctor/upload-profie-image' },
   'POST /api/v1/doctor/validate-token': { action: 'v-1/doctor/validate-token' },
   'GET /api/v1/doctor/get-profile-details': { action: 'v-1/doctor/get-profile-details' },
+  'GET /api/v1/doctor/get-all-doctors': { action: 'v-1/doctor/get-all-doctors' },
 
   //===================== Appointments  Endpoints ====================================
 
@@ -131,7 +133,7 @@ module.exports.routes = {
   'POST /api/v1/appointments/create-appointment': { action: 'v-1/appointments/create-appointment' },
   'GET /api/v1/appointments/get-all-appointments-patient': { action: 'v-1/appointments/get-all-appointments-patient' },
   'GET /api/v1/appointments/get-all-appointments': { action: 'v-1/appointments/get-all-appointments' },
-  'GET /api/v1/appointments/get-appointment-details': { action: 'v-1/appointments/get-appointment-details' },
+  'POST /api/v1/appointments/get-appointment-details': { action: 'v-1/appointments/get-appointment-details' },
 
   //===================== Admission  Endpoints ====================================
 

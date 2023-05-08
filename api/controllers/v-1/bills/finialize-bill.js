@@ -99,12 +99,12 @@ module.exports = {
 
     if (bill.patient_admission) {
       //convert to timezone to send email notification
-      var converted_start_time = sails.moment_tz.tz(bill.patient_admission.admit_date, time_zone).format('YYYY-MM-DD HH:mm A');
-      var converted_end_time = sails.moment_tz.tz(bill.patient_admission.discharge_date, time_zone).format('YYYY-MM-DD HH:mm A');
+      var converted_start_time = sails.moment(bill.patient_admission.admit_date).tz(time_zone).format('YYYY-MM-DD hh:mm A');
+      var converted_end_time = sails.moment(bill.patient_admission.discharge_date).tz(time_zone).format('YYYY-MM-DD hh:mm A');
     } else if (bill.patient_appointment) {
       //convert to timezone to send email notification
-      var converted_start_time = sails.moment_tz.tz(bill.patient_appointment.appointment_start_date, time_zone).format('YYYY-MM-DD HH:mm A');
-      var converted_end_time = sails.moment_tz.tz(bill.patient_appointment.appointment_end_date, time_zone).format('YYYY-MM-DD HH:mm A');
+      var converted_start_time = sails.moment(bill.patient_appointment.appointment_start_date).tz(time_zone).format('YYYY-MM-DD hh:mm A');
+      var converted_end_time = sails.moment(bill.patient_appointment.appointment_end_date).tz(time_zone).format('YYYY-MM-DD hh:mm A');
     }
 
     let email_obj = {

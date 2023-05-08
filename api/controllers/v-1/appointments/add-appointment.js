@@ -76,8 +76,8 @@ module.exports = {
     let end_time = sails.moment.utc(inputs.appointment_date).add(1,'h').format('YYYY-MM-DD HH:mm:ss');
 
     //check appointment exists for doctor in time range
-    let appointment_check_doctor_sql = `SELECT t1.* FROM patient_appointment t1 WHERE (t1.appointment_start_date BETWEEN ${start_time} AND ${end_time}) OR (t1.appointment_end_date BETWEEN ${start_time} AND ${end_time}) AND t1.doctor_id = ${inputs.doctor_id} AND t1.status = 1`;
-    var appointment_check_doctor = sails.sendNativeQuery(appointment_check_doctor_sql);
+    let appointment_check_doctor_sql = `SELECT t1.* FROM patient_appointment t1 WHERE (t1.appointment_start_date BETWEEN '${start_time}' AND '${end_time}') OR (t1.appointment_end_date BETWEEN '${start_time}' AND '${end_time}') AND t1.doctor_id = ${inputs.doctor_id} AND t1.status = ${sails.config.custom.appointment_active}`;
+    var appointment_check_doctor = await sails.sendNativeQuery(appointment_check_doctor_sql);
     appointment_check_doctor = appointment_check_doctor.rows;
 
     if(appointment_check_doctor.length > 0){
@@ -88,8 +88,8 @@ module.exports = {
     }
 
     //check appointment exists for patient in time range
-    let appointment_check_patient_sql = `SELECT t1.* FROM patient_appointment t1 WHERE (t1.appointment_start_date BETWEEN ${start_time} AND ${end_time}) OR (t1.appointment_end_date BETWEEN ${start_time} AND ${end_time}) AND t1.patient_id = ${inputs.patient_id} AND t1.status = 1`;
-    var appointment_check_patient = sails.sendNativeQuery(appointment_check_patient_sql);
+    let appointment_check_patient_sql = `SELECT t1.* FROM patient_appointment t1 WHERE (t1.appointment_start_date BETWEEN '${start_time}' AND '${end_time}') OR (t1.appointment_end_date BETWEEN '${start_time}' AND '${end_time}') AND t1.patient_id = ${inputs.patient_id} AND t1.status = ${sails.config.custom.appointment_active}`;
+    var appointment_check_patient = await sails.sendNativeQuery(appointment_check_patient_sql);
     appointment_check_patient = appointment_check_patient.rows;
 
     if(appointment_check_patient.length > 0){
@@ -117,7 +117,7 @@ module.exports = {
     }).fetch();
 
     //check hospital services apply to every bill
-    let services = await HospitalService.find({is_apply_to_every_appointment:1,status:1});
+    let services = await HospitalService.find({is_apply_to_every_appointment:sails.config.custom.is_apply_to_every_appointment_true,status:sails.config.custom.hospital_service_active});
 
     //create hospital bill services
     if(services.length > 0){
@@ -130,8 +130,24 @@ module.exports = {
     }
 
     //convert to timezone to send email notification
-    let converted_start_time = sails.moment_tz.tz(start_time,time_zone).format('YYYY-MM-DD HH:mm A');
-    let converted_end_time = sails.moment_tz.tz(end_time,time_zone).format('YYYY-MM-DD HH:mm A');
+    let converted_start_time = sails.moment(start_time).tz(time_zone).format('YYYY-MM-DD hh:mm A');
+    let converted_end_time = sails.moment(end_time).tz(time_zone).format('YYYY-MM-DD hh:mm A');
+
+    let patient_email_obj = {
+      USER_NAME:patient.first_name,
+      DOCTOR_NAME:doctor.first_name+' '+doctor.last_name,
+      APPOINTMENT_START_TIME:converted_start_time,
+      APPOINTMENT_END_TIME:converted_end_time,
+      TIMEZONE:time_zone
+    };
+
+    //send email
+    await sails.helpers.email.sendEmail.with({
+      receiver_email:patient.email,
+      receiver_name:patient.first_name+' '+patient.last_name,
+      template_id:sails.config.custom.patient_appointment_confirmed,
+      params:patient_email_obj
+    });
 
     let doctor_email_obj = {
       USER_NAME:doctor.first_name,
@@ -152,6 +168,7 @@ module.exports = {
     // All done.
     return exits.success({
       status:true,
+      show_message: true,
       message:'Appointment created successfully!'
     });
   }

@@ -32,7 +32,7 @@ module.exports = {
     status: {type:'number', defaultsTo:0}, //0-> pending, 10->paid, -10 -> cancelled, 20 ->bill finalized
     patient_admission:{model:'PatientAdmission'},
     patient_appointment:{model:'PatientAppointment'},
-    payment_type:{type:'number'}, //0-> cash, 1-> card
+    payment_type:{type:'number',defaultsTo:0}, //0-> cash, 1-> card
   },
 
 };

@@ -26,7 +26,7 @@ module.exports = {
 
 
   fn: async function (inputs,exits) {
-    let appointment = PatientAppointment.findOne({id:inputs.id}).populate('patient_id').populate('doctor_id');
+    let appointment = await PatientAppointment.findOne({id:inputs.id}).populate('patient_id').populate('doctor_id');
     if(!appointment){
       return exits.handleError({
         status:false,
@@ -67,14 +67,14 @@ module.exports = {
     });
 
     //convert to timezone to send email notification
-    let converted_start_time = sails.moment_tz.tz(appointment.appointment_start_date,time_zone).format('YYYY-MM-DD HH:mm A');
-    let converted_end_time = sails.moment_tz.tz(appointment.appointment_end_date,time_zone).format('YYYY-MM-DD HH:mm A');
+    let converted_start_time = sails.moment(appointment.appointment_start_date).tz(time_zone).format('YYYY-MM-DD hh:mm A');
+    let converted_end_time = sails.moment(appointment.appointment_end_date).tz(time_zone).format('YYYY-MM-DD hh:mm A');
 
     //send appoinment cancel emails
 
     let patient_email_obj = {
       USER_NAME:appointment.patient_id.first_name,
-      APPOINT_USER:'doctor '+appointment.doctor_id.first_name+' '+appointment.doctor_id.last_name,
+      APPOINT_USER:'Doctor '+appointment.doctor_id.first_name+' '+appointment.doctor_id.last_name,
       APPOINTMENT_START_TIME:converted_start_time,
       APPOINTMENT_END_TIME:converted_end_time,
       TIMEZONE:time_zone
@@ -90,7 +90,7 @@ module.exports = {
 
     let doctor_email_obj = {
       USER_NAME:appointment.doctor_id.first_name,
-      APPOINT_USER:'patient '+appointment.patient_id.first_name+' '+appointment.patient_id.last_name,
+      APPOINT_USER:'Patient '+appointment.patient_id.first_name+' '+appointment.patient_id.last_name,
       APPOINTMENT_START_TIME:converted_start_time,
       APPOINTMENT_END_TIME:converted_end_time,
       TIMEZONE:time_zone
@@ -107,6 +107,7 @@ module.exports = {
     // All done.
     return exits.success({
       status:true,
+      show_message: true,
       message:'Appointment cancelled successfully!'
     });
 

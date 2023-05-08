@@ -125,8 +125,8 @@ module.exports = {
     }
 
     //convert to timezone to send email notification
-    let converted_start_time = sails.moment_tz.tz(start_time,time_zone).format('YYYY-MM-DD HH:mm A');
-    let converted_end_time = sails.moment_tz.tz(end_time,time_zone).format('YYYY-MM-DD HH:mm A');
+    let converted_start_time = sails.moment(start_time).tz(time_zone).format('YYYY-MM-DD hh:mm A');
+    let converted_end_time = sails.moment(end_time).tz(time_zone).format('YYYY-MM-DD hh:mm A');
 
     let patient_email_obj = {
       USER_NAME:patient.first_name,

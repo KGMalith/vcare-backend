@@ -27,7 +27,7 @@ module.exports = {
 
   fn: async function (inputs,exits) {
 
-    let appointment = PatientAppointment.findOne({id:inputs.id,patient_id:this.req.user.user_id}).populate('patient_id').populate('doctor_id');
+    let appointment = await PatientAppointment.findOne({id:inputs.id,patient_id:this.req.user.user_id}).populate('patient_id').populate('doctor_id');
     if(!appointment){
       return exits.handleError({
         status:false,
@@ -75,7 +75,7 @@ module.exports = {
 
     let patient_email_obj = {
       USER_NAME:appointment.patient_id.first_name,
-      APPOINT_USER:'doctor '+appointment.doctor_id.first_name+' '+appointment.doctor_id.last_name,
+      APPOINT_USER:'Doctor '+appointment.doctor_id.first_name+' '+appointment.doctor_id.last_name,
       APPOINTMENT_START_TIME:converted_start_time,
       APPOINTMENT_END_TIME:converted_end_time,
       TIMEZONE:time_zone
@@ -91,7 +91,7 @@ module.exports = {
 
     let doctor_email_obj = {
       USER_NAME:appointment.doctor_id.first_name,
-      APPOINT_USER:'patient '+appointment.patient_id.first_name+' '+appointment.patient_id.last_name,
+      APPOINT_USER:'Patient '+appointment.patient_id.first_name+' '+appointment.patient_id.last_name,
       APPOINTMENT_START_TIME:converted_start_time,
       APPOINTMENT_END_TIME:converted_end_time,
       TIMEZONE:time_zone

@@ -71,8 +71,8 @@ module.exports = {
     let end_time = sails.moment.utc(inputs.appointment_date).add(1,'h').format('YYYY-MM-DD HH:mm:ss');
 
     //check appointment exists for doctor in time range
-    let appointment_check_doctor_sql = `SELECT t1.* FROM patient_appointment t1 WHERE (t1.appointment_start_date BETWEEN ${start_time} AND ${end_time}) OR (t1.appointment_end_date BETWEEN ${start_time} AND ${end_time}) AND t1.doctor_id = ${inputs.doctor_id} AND t1.status = 1`;
-    var appointment_check_doctor = sails.sendNativeQuery(appointment_check_doctor_sql);
+    let appointment_check_doctor_sql = `SELECT t1.* FROM patient_appointment t1 WHERE (t1.appointment_start_date BETWEEN '${start_time}' AND '${end_time}') OR (t1.appointment_end_date BETWEEN '${start_time}' AND '${end_time}') AND t1.doctor_id = ${inputs.doctor_id} AND t1.status = ${sails.config.custom.appointment_active}`;
+    var appointment_check_doctor = await sails.sendNativeQuery(appointment_check_doctor_sql);
     appointment_check_doctor = appointment_check_doctor.rows;
 
     if(appointment_check_doctor.length > 0){
@@ -83,8 +83,8 @@ module.exports = {
     }
 
     //check appointment exists for patient in time range
-    let appointment_check_patient_sql = `SELECT t1.* FROM patient_appointment t1 WHERE (t1.appointment_start_date BETWEEN ${start_time} AND ${end_time}) OR (t1.appointment_end_date BETWEEN ${start_time} AND ${end_time}) AND t1.patient_id = ${patient.id} AND t1.status = 1`;
-    var appointment_check_patient = sails.sendNativeQuery(appointment_check_patient_sql);
+    let appointment_check_patient_sql = `SELECT t1.* FROM patient_appointment t1 WHERE (t1.appointment_start_date BETWEEN '${start_time}' AND '${end_time}') OR (t1.appointment_end_date BETWEEN '${start_time}' AND '${end_time}') AND t1.patient_id = ${patient.id} AND t1.status = ${sails.config.custom.appointment_active}`;
+    var appointment_check_patient = await sails.sendNativeQuery(appointment_check_patient_sql);
     appointment_check_patient = appointment_check_patient.rows;
 
     if(appointment_check_patient.length > 0){

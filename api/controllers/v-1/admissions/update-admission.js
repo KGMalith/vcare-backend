@@ -36,7 +36,7 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-    let admission = PatientAdmission.findOne({ id: inputs.id });
+    let admission = await PatientAdmission.findOne({ id: inputs.id });
     if (!admission) {
       return exits.handleError({
         status: false,
@@ -46,7 +46,7 @@ module.exports = {
 
     if (admission.hospital_room != inputs.room_id) {
       //check hospital room available
-      let room = await HospitalRoom.findOne({ id: inputs.room_id, room_status: 1 });
+      let room = await HospitalRoom.findOne({ id: inputs.room_id, room_status: sails.config.custom.hospital_room_available });
 
       if (!room) {
         return exits.handleError({
@@ -86,6 +86,7 @@ module.exports = {
     // All done.
     return exits.success({
       status: true,
+      show_message: true,
       message: 'Patient admission updated successfully!'
     });
 

@@ -27,7 +27,7 @@ module.exports = {
 
 
   fn: async function (inputs,exits) {
-    let admission = PatientAdmission.findOne({id:inputs.id});
+    let admission = await PatientAdmission.findOne({id:inputs.id});
     if(!admission){
       return exits.handleError({
         status:false,
@@ -59,6 +59,7 @@ module.exports = {
     // All done.
     return exits.success({
       status:true,
+      show_message: true,
       message:'Patient discharged successfully!'
     });
 

@@ -74,6 +74,9 @@ module.exports.custom = {
   appointment_active: 1,
   appointment_cancel: 0,
 
+  admission_active: 1,
+  patient_discharged: 0,
+
   //s3
   s3_key: '',
   s3_secret: '',

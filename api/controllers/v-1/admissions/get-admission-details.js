@@ -28,13 +28,19 @@ module.exports = {
   fn: async function (inputs,exits) {
 
     //get appointments
-    let admission = await PatientAdmission.find({id:inputs.id}).populate('hospital_room').populate('patient_id');
+    let admission = await PatientAdmission.findOne({id:inputs.id}).populate('hospital_room').populate('patient_id');
 
-    let doctors = await PatientAdmissionDoctor.find({admission_id:inputs.id}).populate('doctor_id');
+    let doctorsList = await PatientAdmissionDoctor.find({select:['doctor_id'],where:{admission_id:inputs.id}});
+
+    let newDoctors = [];
+    for(let doctor of doctorsList){
+      let doctorObj = await Doctor.findOne({select:['doctor_code','email','first_name','id','image','last_name','mobile'],where:{id:doctor.doctor_id}});
+      newDoctors.push(doctorObj);
+    }
 
     let bill = await HospitalBill.findOne({patient_admission:inputs.id});
 
-    admission.doctors = doctors;
+    admission.doctors = newDoctors;
     admission.bill = bill;
 
     // All done.

@@ -139,7 +139,7 @@ module.exports.routes = {
 
   'POST /api/v1/admissions/add-admission': { action: 'v-1/admissions/add-admission' },
   'POST /api/v1/admissions/discharge-patient': { action: 'v-1/admissions/discharge-patient' },
-  'GET /api/v1/admissions/get-admission-details': { action: 'v-1/admissions/get-admission-details' },
+  'POST /api/v1/admissions/get-admission-details': { action: 'v-1/admissions/get-admission-details' },
   'GET /api/v1/admissions/get-all-admissions-patient': { action: 'v-1/admissions/get-all-admissions-patient' },
   'GET /api/v1/admissions/get-all-admissions': { action: 'v-1/admissions/get-all-admissions' },
   'POST /api/v1/admissions/update-admission': { action: 'v-1/admissions/update-admission' },

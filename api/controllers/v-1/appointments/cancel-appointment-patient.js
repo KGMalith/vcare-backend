@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 module.exports = {
 
 
@@ -54,6 +55,14 @@ module.exports = {
       return exits.handleError({
         status:false,
         message:'Past appointments cannot cancelled!'
+      });
+    }
+
+    //check appointment status
+    if(appointment.status != sails.config.custom.appointment_active){
+      return exits.handleError({
+        status:false,
+        message:'Appointment cannot cancel!'
       });
     }
 

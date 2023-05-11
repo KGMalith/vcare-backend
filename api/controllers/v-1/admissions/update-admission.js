@@ -55,6 +55,14 @@ module.exports = {
         });
       }
 
+      //check patient discharged
+      if(admission.status != sails.config.custom.admission_active){
+        return exits.handleError({
+          status: false,
+          message: 'Discharged admissions cannot update!'
+        });
+      }
+
       //update previous room status
       await HospitalRoom.updateOne({ id: admission.hospital_room }).set({
         room_status: 20

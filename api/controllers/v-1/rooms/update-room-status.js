@@ -57,6 +57,15 @@ module.exports = {
       });
     }
 
+    //check room is assigned for admission and patient not discharged
+    let admissionObj = await PatientAdmission.findOne({hospital_room:room_obj.id,status:sails.config.custom.admission_active});
+    if(admissionObj){
+      return exits.handleError({
+        status:false,
+        message:'Room Status Cannot Update. Room Occupied in admission!'
+      });
+    }
+
     //update room status
     await HospitalRoom.updateOne({id:inputs.id}).set({
       room_status:inputs.status
@@ -65,6 +74,7 @@ module.exports = {
     // All done.
     return exits.success({
       status:true,
+      show_message: true,
       message:'Status updated successfully!'
     });
 

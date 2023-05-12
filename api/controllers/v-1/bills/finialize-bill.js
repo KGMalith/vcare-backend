@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable no-redeclare */
 /* eslint-disable block-scoped-var */
 module.exports = {
@@ -16,6 +17,10 @@ module.exports = {
     },
     discount: {
       type: 'number',
+      required: true
+    },
+    type:{
+      type: 'string',
       required: true
     }
   },
@@ -44,6 +49,13 @@ module.exports = {
       });
     }
 
+    if(bill.status != sails.config.custom.hospital_bill_pending){
+      return exits.handleError({
+        status: false,
+        message: 'Only pending bills can finalized!'
+      });
+    }
+
     //get settings
     let time_zone = null;
     let respond = await sails.helpers.other.getTimezone();
@@ -62,7 +74,7 @@ module.exports = {
     let service_array = [];
     //add service charge to total amount
     for (let service of services) {
-      let serviceObj = await HospitalService.find({ id: service.hospital_service_id });
+      let serviceObj = await HospitalService.findOne({ id: service.hospital_service_id });
       total_amount = total_amount + serviceObj.service_charge;
       service_array.push({
         code:serviceObj.service_code,
@@ -84,15 +96,24 @@ module.exports = {
       });
     }
 
+    //calculate discount amount
+    let discount = 0;
+    if(inputs.type == 'Precentage'){
+      discount = parseFloat(((total_amount / 100) * inputs.discount).toFixed(2));
+    }else{
+      discount = inputs.discount;
+    }
+
+
     //update hospital bill by adding discount
     let newBillObj = await HospitalBill.updateOne({ id: inputs.id }).set({
       gross_total:total_amount,
-      discount: inputs.discount,
-      grand_total:(total_amount - inputs.discount),
+      discount: discount,
+      grand_total:(total_amount - discount),
       status:20
     }).fetch();
 
-    let patient_id = bill.patient_admission ? bill.patient_admission.patient_id:bill.patient_appointment && bill.patient_appointment.patient_id
+    let patient_id = bill.patient_admission ? bill.patient_admission.patient_id:bill.patient_appointment && bill.patient_appointment.patient_id;
 
     //send bill email to patient
     let patientObj = await Patient.findOne({ id:patient_id});
@@ -130,6 +151,7 @@ module.exports = {
     // All done.
     return exits.success({
       status:true,
+      show_message: true,
       message:'Hospital bill finalized successfully!'
     });
 

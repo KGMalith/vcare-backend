@@ -42,7 +42,7 @@ module.exports = {
       });
     }
 
-    if(bill.status != 0){
+    if(bill.status != sails.config.custom.hospital_bill_pending){
       return exits.handleError({
         status:false,
         message:'Bill cannot update!'
@@ -65,6 +65,7 @@ module.exports = {
     // All done.
     return exits.success({
       status:true,
+      show_message: true,
       message:'Hospital bill service deleted successfully!'
     });
 

@@ -42,7 +42,7 @@ module.exports = {
       });
     }
 
-    if(bill.status != 0){
+    if(bill.status != sails.config.custom.hospital_bill_pending){
       return exits.handleError({
         status:false,
         message:'Bill cannot update!'
@@ -62,7 +62,7 @@ module.exports = {
     //check service is active
     let hospital_service = await HospitalService.findOne({id:inputs.service_id});
 
-    if(hospital_service.status == 0){
+    if(hospital_service.status == sails.config.custom.hospital_service_inactive){
       return exits.handleError({
         status:false,
         message:'Service not active!'
@@ -79,6 +79,7 @@ module.exports = {
     // All done.
     return exits.success({
       status:true,
+      show_message: true,
       message:'Hospital bill service added successfully!'
     });
 

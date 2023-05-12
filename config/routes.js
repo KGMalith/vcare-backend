@@ -149,6 +149,9 @@ module.exports.routes = {
   'POST /api/v1/bills/delete-bill-services': { action: 'v-1/bills/delete-bill-services' },
   'POST /api/v1/bills/finialize-bill': { action: 'v-1/bills/finialize-bill' },
   'POST /api/v1/bills/pay-bill': { action: 'v-1/bills/pay-bill' },
+  'POST /api/v1/bills/view-bill': { action: 'v-1/bills/view-bill' },
+  'GET /api/v1/bills/get-all-bills': { action: 'v-1/bills/get-all-bills' },
+  'GET /api/v1/bills/get-all-bills-patient': { action: 'v-1/bills/get-all-bills-patient' },
 
   //settings
   'POST /api/v1/settings/update-timezone': { action: 'v-1/settings/update-timezone' },

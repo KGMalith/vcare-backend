@@ -77,6 +77,16 @@ module.exports.custom = {
   admission_active: 1,
   patient_discharged: 0,
 
+  hospital_bill_pending: 0,
+  hospital_bill_paid: 10,
+  hospital_bill_cancelled: -10,
+  hospital_bill_finalized: 20,
+
+  cash_payment: 0,
+  card_payment: 1,
+
+
+
   //s3
   s3_key: '',
   s3_secret: '',

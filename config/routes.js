@@ -115,7 +115,7 @@ module.exports.routes = {
   //===================== Doctor  Endpoints ====================================
 
   'POST /api/v1/doctor/forgot-password': { action: 'v-1/doctor/forgot-password' },
-  'GET /api/v1/doctor/get-profile': { action: 'v-1/doctor/get-profile' },
+  'POST /api/v1/doctor/get-profile': { action: 'v-1/doctor/get-profile' },
   'POST /api/v1/doctor/reset-password': { action: 'v-1/doctor/reset-password' },
   'POST /api/v1/doctor/sign-in': { action: 'v-1/doctor/sign-in' },
   'POST /api/v1/doctor/sign-up': { action: 'v-1/doctor/sign-up' },

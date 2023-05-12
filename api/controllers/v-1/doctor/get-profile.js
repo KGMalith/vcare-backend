@@ -8,7 +8,10 @@ module.exports = {
 
 
   inputs: {
-
+    id:{
+      type:'number',
+      required:true
+    }
   },
 
 
@@ -24,7 +27,7 @@ module.exports = {
 
   fn: async function (inputs,exits) {
   //check current user id exists
-    let user = Doctor.findOne({id:this.req.user.user_id});
+    let user = await Doctor.findOne({select:['id','doctor_code','first_name','last_name','nic','image','email','mobile'],where:{id:inputs.id}});
 
     if(!user){
       return exits.handleError({
@@ -34,10 +37,10 @@ module.exports = {
     }
 
     //get doctor appointments
-    let appointments = await PatientAppointment.find({doctor_id:this.req.user.user_id}).populate('patient_id');
+    let appointments = await PatientAppointment.find({doctor_id:inputs.id}).populate('patient_id');
 
     //get doctor admissions
-    let admissions = await PatientAdmissionDoctor.find({doctor_id:this.req.user.user_id}).populate('admission_id');
+    let admissions = await PatientAdmissionDoctor.find({doctor_id:inputs.id}).populate('admission_id');
 
     for(let admission of admissions){
       let patient = await Patient.findOne({id:admission.admission_id.patient_id});

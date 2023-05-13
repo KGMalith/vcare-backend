@@ -82,7 +82,7 @@ module.exports = {
       last_name:inputs.last_name,
       email:inputs.email,
       password:encrypted_password,
-      role_id:2,
+      role_id:sails.config.custom.patient_role_id,
       nic:inputs.nic
     }).fetch();
 

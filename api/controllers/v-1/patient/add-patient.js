@@ -2,7 +2,7 @@
 module.exports = {
 
 
-  friendlyName: 'Add user',
+  friendlyName: 'Add patient',
 
 
   description: '',
@@ -21,8 +21,8 @@ module.exports = {
       type:'string',
       required:true
     },
-    role_id:{
-      type:'number',
+    nic:{
+      type:'string',
       required:true
     },
   },
@@ -56,33 +56,24 @@ module.exports = {
       });
     }
 
-    //check id is valied
-    let role_obj = await Role.findOne({id:inputs.role_id});
-
-    if(!role_obj){
-      return exits.handleError({
-        status:false,
-        message:'Invalid role id!'
-      });
-    }
-
     //generate user code
-    let user_code = await sails.helpers.other.generateId('USR');
+    let patient_code = await sails.helpers.other.generateId('PAT');
 
     //create user
-    var user_obj = await User.create({
-      user_code:user_code,
+    var patient_obj = await Patient.create({
+      patient_code:patient_code,
       first_name:inputs.first_name,
       last_name:inputs.last_name,
       email:inputs.email,
-      role_id:inputs.role_id,
+      nic:inputs.nic,
+      role_id:sails.config.custom.patient_role_id,
     }).fetch();
 
-    let hash_code = await sails.helpers.other.encrypt(user_obj.id);
+    let hash_code = await sails.helpers.other.encrypt(patient_obj.id);
     let hash_code_expire = sails.moment().utc().add(24,'h').format('YYYY-MM-DD HH:mm:ss');
 
     //update user
-    await User.updateOne({id:user_obj.id}).set({
+    await Patient.updateOne({id:patient_obj.id}).set({
       hash_code:hash_code,
       hash_code_expire:hash_code_expire
     });
@@ -90,21 +81,21 @@ module.exports = {
     //send email
     let params = {
       USER_NAME:inputs.first_name+' '+inputs.last_name,
-      ROLE:role_obj.role_name,
-      LINK:`${sails.config.custom.frontend_base_url}user/invitation?code=${hash_code}`
+      ROLE:'Patient',
+      LINK:`${sails.config.custom.frontend_base_url}patient/invitation?code=${hash_code}`
     };
 
     let respond = await sails.helpers.email.sendEmail.with({
       receiver_email:inputs.email,
       receiver_name:inputs.first_name+' '+inputs.last_name,
-      template_id:sails.config.custom.user_signup_invitation,
+      template_id:sails.config.custom.patient_signup_invitation,
       params:params
     });
 
     if(respond.status){
       //update user as email sent
-      await User.updateOne({id:user_obj.id}).set({
-        is_invitation_sent:sails.config.custom.user_invitation_sent,
+      await Patient.updateOne({id:patient_obj.id}).set({
+        is_invitation_sent:sails.config.custom.patient_invitation_sent,
       });
     }
 
@@ -112,7 +103,7 @@ module.exports = {
     return exits.success({
       status:true,
       show_message: true,
-      message:'User added to system successfully!'
+      message:'Patient added to system successfully!'
     });
 
   }

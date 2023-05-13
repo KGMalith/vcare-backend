@@ -95,21 +95,24 @@ module.exports.routes = {
   //===================== Patient  Endpoints ====================================
 
   'POST /api/v1/patient/forgot-password': { action: 'v-1/patient/forgot-password' },
-  'GET /api/v1/patient/get-profile': { action: 'v-1/patient/get-profile' },
+  'POST /api/v1/patient/get-profile': { action: 'v-1/patient/get-profile' },
   'POST /api/v1/patient/reset-password': { action: 'v-1/patient/reset-password' },
   'POST /api/v1/patient/sign-in': { action: 'v-1/patient/sign-in' },
   'POST /api/v1/patient/sign-up': { action: 'v-1/patient/sign-up' },
   'POST /api/v1/patient/update-profile': { action: 'v-1/patient/update-profile' },
   'POST /api/v1/patient/upload-profile-image': { action: 'v-1/patient/upload-profile-image' },
   'POST /api/v1/patient/validate-token': { action: 'v-1/patient/validate-token' },
+  'POST /api/v1/patient/add-patient': { action: 'v-1/patient/add-patient' },
+  'POST /api/v1/patient/invitation-validate-token': { action: 'v-1/patient/invitation-validate-token' },
   'GET /api/v1/patient/get-profile-details': { action: 'v-1/patient/get-profile-details' },
   'GET /api/v1/patient/get-all-patients': { action: 'v-1/patient/get-all-patients' },
+  'POST /api/v1/patient/setup-password': { action: 'v-1/patient/setup-password' },
 
   'POST /api/v1/patient/contact/add-contact': { action: 'v-1/patient/contact/add-contact' },
-  'DELETE /api/v1/patient/contact/delete-contact': { action: 'v-1/patient/contact/delete-contact' },
+  'POST /api/v1/patient/contact/delete-contact': { action: 'v-1/patient/contact/delete-contact' },
 
   'POST /api/v1/patient/documents/create-document': { action: 'v-1/patient/documents/create-document' },
-  'DELETE /api/v1/patient/documents/delete-document': { action: 'v-1/patient/documents/delete-document' },
+  'POST /api/v1/patient/documents/delete-document': { action: 'v-1/patient/documents/delete-document' },
   'POST /api/v1/patient/documents/upload-document': { action: 'v-1/patient/documents/upload-document' },
 
   //===================== Doctor  Endpoints ====================================

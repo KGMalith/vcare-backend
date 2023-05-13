@@ -27,14 +27,20 @@ module.exports = {
 
   fn: async function (inputs,exits) {
     //check patient document exists for user
-    let is_exists = await PatientDocument.findOne({id:inputs.id});
+    let patientDocument = await PatientDocument.findOne({id:inputs.id});
 
-    if(!is_exists){
+    if(!patientDocument){
       return exits.handleError({
         status:false,
         message:'Employee document not found!'
       });
     }
+
+    //delete s3 document
+    await sails.helpers.s3.deleteObject.with({
+      bucket:sails.config.custom.s3_bucket,
+      file_name:patientDocument.document_URL
+    });
 
     //delete document
     await PatientDocument.destroyOne({id:inputs.id});

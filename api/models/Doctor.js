@@ -40,7 +40,7 @@ module.exports = {
     role_id:{model:'Role'}
   },
 
-  customToJson:function (){
+  customToJson:async function (){
     return _.omit(this,[
       'password',
       'hash_code',

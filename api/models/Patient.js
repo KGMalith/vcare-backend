@@ -35,6 +35,7 @@ module.exports = {
     hash_code_expire:{type:'ref',columnType: 'datetime'},
     is_email_confirmation_sent:{type:'number', defaultsTo:0},
     forgot_password_requested:{type:'number', defaultsTo:0},
+    is_invitation_sent:{type:'number', defaultsTo:0},
     nic:{type:'string',required:true},
     mobile: {type:'string', allowNull:true},
     role_id:{model:'Role'}

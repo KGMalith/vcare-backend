@@ -41,11 +41,11 @@ module.exports = {
       let respond = await sails.helpers.s3.getObject.with({
         bucket:sails.config.custom.s3_bucket,
         file_name:employee_obj.image,
-        is_expire:false
+        is_expire:true
       });
-      employee_obj.image_url = respond.data;
+      employee_obj.image = respond.data;
     }else{
-      employee_obj.image_url = null;
+      employee_obj.image = null;
     }
 
     let employeeDocuments = await EmployeeDocument.find({emp_id:employee_obj.id});

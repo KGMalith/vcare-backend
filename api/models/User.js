@@ -29,7 +29,7 @@ module.exports = {
     last_name: {type:'string', required:true},
     email: {type:'string', required:true},
     image:{type:'string', allowNull:true},
-    password:{type:'string', required:true},
+    password:{type:'string', allowNull:true},
     is_signup_completed:{type:'number', defaultsTo:0},
     hash_code:{type:'string', allowNull:true},
     hash_code_expire:{type:'ref',columnType: 'datetime'},

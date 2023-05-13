@@ -29,6 +29,15 @@ module.exports = {
       }else{
         employee.user_id = null;
       }
+
+      if(employee.image){
+        let respond = await sails.helpers.s3.getObject.with({
+          bucket:sails.config.custom.s3_bucket,
+          file_name:employee.image,
+          is_expire:true
+        });
+        employee.image = respond.data;
+      }
     }
 
     // All done.

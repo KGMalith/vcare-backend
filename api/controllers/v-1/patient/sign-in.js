@@ -62,11 +62,15 @@ module.exports = {
     //get all permissions related to role
     let permissions = await RolePermission.find({select:['permission_id'],where:{role_id:user_obj.role_id,is_active:sails.config.custom.role_permission_active}});
 
+    let permissionArray = permissions.map((obj)=>{
+      return obj.permission_id;
+    });
+
     const token_body = {
       user_email:user_obj.email,
       user_role:user_obj.role_id,
       user_id:user_obj.id,
-      permissions:permissions,
+      permissions:permissionArray,
     };
 
     //generate jwt token
@@ -79,7 +83,7 @@ module.exports = {
       user_name:user_obj.first_name +' '+user_obj.last_name,
       user_email:user_obj.email,
       user_role:user_obj.role_id,
-      permissions:permissions,
+      permissions:permissionArray,
       timezone:timezone ? timezone.value : null,
       token:json_token
     };

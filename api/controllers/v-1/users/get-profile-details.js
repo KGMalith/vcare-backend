@@ -40,6 +40,15 @@ module.exports = {
       });
     }
 
+    if(user.image){
+      let respond = await sails.helpers.s3.getObject.with({
+        bucket:sails.config.custom.s3_bucket,
+        file_name:user.image,
+        is_expire:true
+      });
+      user.image = respond.data;
+    }
+
     var timezone = null;
     //get timezone
     if(this.req.user.user_role == sails.config.custom.admin_role_id){

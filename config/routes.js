@@ -59,6 +59,7 @@ module.exports.routes = {
   'POST /api/v1/users/upload-profile-image': { action: 'v-1/users/upload-profile-image' },
   'POST /api/v1/users/validate-token': { action: 'v-1/users/validate-token' },
   'GET /api/v1/users/get-profile-details': { action: 'v-1/users/get-profile-details' },
+  'POST /api/v1/users/set-user-image': { action: 'v-1/users/set-user-image' },
 
   //Rooms
   'POST /api/v1/rooms/create-room': { action: 'v-1/rooms/create-room' },
@@ -107,6 +108,7 @@ module.exports.routes = {
   'GET /api/v1/patient/get-profile-details': { action: 'v-1/patient/get-profile-details' },
   'GET /api/v1/patient/get-all-patients': { action: 'v-1/patient/get-all-patients' },
   'POST /api/v1/patient/setup-password': { action: 'v-1/patient/setup-password' },
+  'POST /api/v1/patient/set-patient-image': { action: 'v-1/patient/set-patient-image' },
 
   'POST /api/v1/patient/contact/add-contact': { action: 'v-1/patient/contact/add-contact' },
   'POST /api/v1/patient/contact/delete-contact': { action: 'v-1/patient/contact/delete-contact' },
@@ -125,6 +127,7 @@ module.exports.routes = {
   'POST /api/v1/doctor/update-profile': { action: 'v-1/doctor/update-profile' },
   'POST /api/v1/doctor/upload-profile-image': { action: 'v-1/doctor/upload-profie-image' },
   'POST /api/v1/doctor/validate-token': { action: 'v-1/doctor/validate-token' },
+  'POST /api/v1/doctor/set-doctor-image': { action: 'v-1/doctor/set-doctor-image' },
   'GET /api/v1/doctor/get-profile-details': { action: 'v-1/doctor/get-profile-details' },
   'GET /api/v1/doctor/get-all-doctors': { action: 'v-1/doctor/get-all-doctors' },
 
@@ -158,4 +161,8 @@ module.exports.routes = {
 
   //settings
   'POST /api/v1/settings/update-timezone': { action: 'v-1/settings/update-timezone' },
+  'GET /api/v1/settings/set-default-role-permissions': { action: 'v-1/settings/set-default-role-permissions' },
+
+  //dashboard
+  'GET /api/v1/dashboard/dashboard': { action: 'v-1/dashboard/dashboard' },
 };

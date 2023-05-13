@@ -37,4 +37,5 @@ module.exports.policies = {
     'reset-password':true,
     'validate-token': true,
   },
+  'v-1/settings/set-default-role-permissions':true,
 };
